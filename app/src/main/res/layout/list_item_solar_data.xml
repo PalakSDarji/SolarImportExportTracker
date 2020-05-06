@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="clickListener"
+            type="android.view.View.OnClickListener" />
+
+        <variable
+            name="solarData"
+            type="com.palak.solarimportexporttracker.model.SolarData" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="20">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvDate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="5"
+            android:textSize="15sp"
+            android:text="@{String.valueOf(solarData.date)}"
+            tools:text="03/05/2020" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvImport"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="5"
+            android:textSize="15sp"
+            android:text="@{solarData.import}"
+            tools:text="03/05/2020" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvExport"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="5"
+            android:textSize="15sp"
+            android:text="@{solarData.export}"
+            tools:text="03/05/2020" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvDiff"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="5"
+            android:textSize="15sp"
+
+            tools:text="03/05/2020" />
+        <!--android:text="@{Integer.parseInt(solarData.export) - Integer.parseInt(solarData.import)}"-->
+    </LinearLayout>
+</layout>

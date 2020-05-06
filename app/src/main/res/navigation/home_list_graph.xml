@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/home_list_graph"
+    app:startDestination="@id/solarListFragment">
+
+    <fragment
+        android:id="@+id/solarListFragment"
+        android:name="com.palak.solarimportexporttracker.ui.fragments.SolarListFragment"
+        android:label="fragment_solar_list"
+        tools:layout="@layout/fragment_solar_list" >
+        <action
+            android:id="@+id/action_solarListFragment_to_addSolarFragment"
+            app:destination="@id/addSolarFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addSolarFragment"
+        android:name="com.palak.solarimportexporttracker.ui.fragments.AddSolarFragment"
+        android:label="fragment_add_solar"
+        tools:layout="@layout/fragment_add_solar" />
+</navigation>
