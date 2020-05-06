@@ -17,12 +17,6 @@ class SolarListViewModel(application: Application, private val solarDataReposito
     fun fetchSolarDataList() : LiveData<List<SolarData>>{
 
         solarDataList = solarDataRepository.solarDataList
-
-        /*if(!solarDataRepository.solarDataList.value.isNullOrEmpty()) {
-            solarDataList.value = solarDataRepository.solarDataList.value
-            return solarDataList
-        }*/
-
         return solarDataList
     }
 

@@ -10,7 +10,7 @@ import com.palak.solarimportexporttracker.model.SolarData
 @Dao
 interface SolarDataDao {
 
-    @Query("SELECT * from solar_data ORDER BY date ASC")
+    @Query("SELECT * from solar_data ORDER BY date DESC")
     fun fetchSolarData() : LiveData<List<SolarData>>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)

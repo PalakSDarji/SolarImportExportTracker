@@ -1,10 +1,12 @@
 package com.palak.solarimportexporttracker.ui.fragments
 
+import android.app.DatePickerDialog
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.DatePicker
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.NavController
@@ -15,6 +17,7 @@ import com.palak.solarimportexporttracker.Utils.InjectorUtils
 import com.palak.solarimportexporttracker.adapter.SolarListAdapter
 import com.palak.solarimportexporttracker.databinding.FragmentSolarListBinding
 import com.palak.solarimportexporttracker.viewmodel.SolarListViewModel
+import java.util.*
 
 /**
  * This screen shows list of import exports of solar power date wise.
@@ -25,9 +28,9 @@ class SolarListFragment : Fragment() {
     val solarListViewModel by activityViewModels<SolarListViewModel> {
         InjectorUtils.getSolarListViewModelFactory(requireActivity().application)
     }
-
     private lateinit var adapter : SolarListAdapter
     private lateinit var navController: NavController
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

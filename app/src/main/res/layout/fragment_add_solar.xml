@@ -7,7 +7,7 @@
     tools:context=".ui.fragments.AddSolarFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <androidx.appcompat.widget.AppCompatEditText
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/etDate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
