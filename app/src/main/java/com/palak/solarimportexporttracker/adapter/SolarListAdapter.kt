@@ -40,9 +40,7 @@ class SolarListAdapter : ListAdapter<SolarData, ViewHolder>(SolarDataDiffCallbac
             }
         }
     }
-
 }
-
 
 private class SolarDataDiffCallback : DiffUtil.ItemCallback<SolarData>(){
     override fun areItemsTheSame(oldItem: SolarData, newItem: SolarData): Boolean {

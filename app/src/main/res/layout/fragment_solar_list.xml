@@ -5,7 +5,6 @@
     tools:context=".ui.fragments.SolarListFragment">
 
     <data>
-
         <variable
             name="hasData"
             type="boolean" />

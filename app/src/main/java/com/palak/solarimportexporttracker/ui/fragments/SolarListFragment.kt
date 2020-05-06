@@ -25,7 +25,7 @@ import java.util.*
 class SolarListFragment : Fragment() {
 
     private lateinit var binding : FragmentSolarListBinding
-    val solarListViewModel by activityViewModels<SolarListViewModel> {
+    private val solarListViewModel by activityViewModels<SolarListViewModel> {
         InjectorUtils.getSolarListViewModelFactory(requireActivity().application)
     }
     private lateinit var adapter : SolarListAdapter
