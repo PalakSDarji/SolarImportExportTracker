@@ -13,10 +13,14 @@
         <action
             android:id="@+id/action_solarListFragment_to_addSolarFragment"
             app:destination="@id/addSolarFragment" />
+        <action
+            android:id="@+id/action_solarListFragment_to_auth_graph"
+            app:destination="@id/auth_graph" />
     </fragment>
     <fragment
         android:id="@+id/addSolarFragment"
         android:name="com.palak.solarimportexporttracker.ui.fragments.AddSolarFragment"
         android:label="fragment_add_solar"
         tools:layout="@layout/fragment_add_solar" />
+    <include app:graph="@navigation/auth_graph" />
 </navigation>
