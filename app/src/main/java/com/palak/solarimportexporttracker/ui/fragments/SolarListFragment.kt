@@ -4,6 +4,7 @@ import android.app.DatePickerDialog
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.DatePicker
@@ -48,8 +49,15 @@ class SolarListFragment : Fragment() {
     }
 
     private fun setClickListeners() {
-        binding.btnAdd.setOnClickListener {
-            navController.navigate(R.id.action_solarListFragment_to_addSolarFragment)
+
+        binding.bottomNavView.setOnNavigationItemSelectedListener {
+            item ->
+            when(item.itemId){
+                R.id.btnAddSolarData -> navController.navigate(R.id.action_solarListFragment_to_addSolarFragment)
+                R.id.btnSync -> navController.navigate(R.id.action_solarListFragment_to_auth_graph)
+                R.id.btnAccount -> TODO("later!") /*navController.navigate(R.id.action_solarListFragment_to_addSolarFragment)*/
+            }
+            return@setOnNavigationItemSelectedListener true
         }
     }
 

@@ -1,7 +1,6 @@
 package com.palak.solarimportexporttracker.repository
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import com.palak.solarimportexporttracker.dao.SolarDataDao
 import com.palak.solarimportexporttracker.model.SolarData
 
