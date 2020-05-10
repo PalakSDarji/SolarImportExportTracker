@@ -16,4 +16,8 @@
     <string name="txt_add_data">Add Data</string>
     <string name="txt_account">Account</string>
     <string name="txt_sync">Sync Data</string>
+
+    <string name="facebook_app_id">691623254993118</string>
+    <string name="fb_login_protocol_scheme">fb691623254993118</string>
+
 </resources>

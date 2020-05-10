@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "876576882658",
+    "firebase_url": "https://solarimportexporttracker.firebaseio.com",
+    "project_id": "solarimportexporttracker",
+    "storage_bucket": "solarimportexporttracker.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:876576882658:android:92918c443c2af9447b03bb",
+        "android_client_info": {
+          "package_name": "com.palak.solarimportexporttracker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "876576882658-omt0t4u59fjrprh0nbgihnc4k1a159si.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.palak.solarimportexporttracker",
+            "certificate_hash": "0da50f4a88f93c848a800d8504cd934ae97e8a4c"
+          }
+        },
+        {
+          "client_id": "876576882658-vjupmvhdrim54ddnn60b53nm0ojg49te.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAX3KEYq74q_XD6P9Ap7oLslgHODfP7IFM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "876576882658-vjupmvhdrim54ddnn60b53nm0ojg49te.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
