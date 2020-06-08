@@ -3,12 +3,18 @@ package com.palak.solarimportexporttracker.repository
 import androidx.lifecycle.LiveData
 import com.palak.solarimportexporttracker.dao.SolarDataDao
 import com.palak.solarimportexporttracker.model.SolarData
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 class SolarDataRepository(private val solarDataDao: SolarDataDao) {
 
-    val solarDataList : LiveData<List<SolarData>> = solarDataDao.fetchSolarData()
+    fun fetchSolarData() : LiveData<List<SolarData>>{
+        return solarDataDao.fetchSolarData()
+    }
 
     suspend fun insertSolarData(solarData: SolarData){
-        solarDataDao.insertSolarData(solarData)
+        withContext(Dispatchers.IO){
+            solarDataDao.insertSolarData(solarData)
+        }
     }
 }

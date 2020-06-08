@@ -62,7 +62,7 @@ class SolarListFragment : Fragment() {
     }
 
     private fun subscribeUi() {
-        solarListViewModel.fetchSolarDataList().observe(viewLifecycleOwner, Observer {
+        solarListViewModel.solarDataList.observe(viewLifecycleOwner, Observer {
                 solarDataList ->
                 println("SolarDataList: $solarDataList")
                 binding.hasData = !solarDataList.isNullOrEmpty()
