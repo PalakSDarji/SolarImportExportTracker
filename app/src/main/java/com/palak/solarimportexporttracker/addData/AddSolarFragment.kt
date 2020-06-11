@@ -1,4 +1,4 @@
-package com.palak.solarimportexporttracker.ui.fragments
+package com.palak.solarimportexporttracker.addData
 
 import android.app.DatePickerDialog
 import android.os.Bundle
@@ -6,7 +6,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.DatePicker
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
@@ -14,7 +13,7 @@ import com.palak.solarimportexporttracker.R
 import com.palak.solarimportexporttracker.Utils.InjectorUtils
 import com.palak.solarimportexporttracker.Utils.hideKeyboard
 import com.palak.solarimportexporttracker.model.SolarData
-import com.palak.solarimportexporttracker.viewmodel.SolarListViewModel
+import com.palak.solarimportexporttracker.solarData.SolarListViewModel
 import kotlinx.android.synthetic.main.fragment_add_solar.*
 import java.text.SimpleDateFormat
 import java.util.*

@@ -1,4 +1,4 @@
-package com.palak.solarimportexporttracker.ui.activities
+package com.palak.solarimportexporttracker.solarData
 
 import android.app.NotificationChannel
 import android.app.NotificationManager

@@ -1,12 +1,9 @@
-package com.palak.solarimportexporttracker.viewmodel
+package com.palak.solarimportexporttracker.solarData.login
 
 import android.app.Application
 import android.content.Intent
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import com.facebook.AccessToken
-import com.facebook.CallbackManager
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseUser
@@ -17,7 +14,8 @@ abstract class LoginViewModel(application: Application) : AndroidViewModel(appli
         GOOGLE_LOGIN, FB_LOGIN, NO_LOGIN
     }
 
-    open var status = LoginStatus.NO_LOGIN
+    open var status =
+        LoginStatus.NO_LOGIN
     open var user : FirebaseUser? = null
 
     open fun initiate() {}

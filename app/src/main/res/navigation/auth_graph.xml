@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.palak.solarimportexporttracker.ui.fragments.LoginFragment"
+        android:name="com.palak.solarimportexporttracker.solarData.login.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" />
 </navigation>

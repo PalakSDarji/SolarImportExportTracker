@@ -1,11 +1,10 @@
-package com.palak.solarimportexporttracker.viewmodel
+package com.palak.solarimportexporttracker.solarData
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
 import com.palak.solarimportexporttracker.model.SolarData
-import com.palak.solarimportexporttracker.repository.SolarDataRepository
 import kotlinx.coroutines.launch
 
 class SolarListViewModel(application: Application, private val solarDataRepository: SolarDataRepository) : AndroidViewModel(application) {

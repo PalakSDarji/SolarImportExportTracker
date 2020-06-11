@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/solarListFragment"
-        android:name="com.palak.solarimportexporttracker.ui.fragments.SolarListFragment"
+        android:name="com.palak.solarimportexporttracker.solarData.SolarListFragment"
         android:label="fragment_solar_list"
         tools:layout="@layout/fragment_solar_list" >
         <action
@@ -19,7 +19,7 @@
     </fragment>
     <fragment
         android:id="@+id/addSolarFragment"
-        android:name="com.palak.solarimportexporttracker.ui.fragments.AddSolarFragment"
+        android:name="com.palak.solarimportexporttracker.addData.AddSolarFragment"
         android:label="fragment_add_solar"
         tools:layout="@layout/fragment_add_solar" />
     <include app:graph="@navigation/auth_graph" />

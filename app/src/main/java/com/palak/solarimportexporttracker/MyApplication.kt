@@ -1,4 +1,4 @@
-package com.palak.solarimportexporttracker.ui
+package com.palak.solarimportexporttracker
 
 import android.app.Application
 import android.content.Context

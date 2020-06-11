@@ -1,7 +1,6 @@
-package com.palak.solarimportexporttracker.repository
+package com.palak.solarimportexporttracker.solarData
 
 import androidx.lifecycle.LiveData
-import com.palak.solarimportexporttracker.dao.SolarDataDao
 import com.palak.solarimportexporttracker.model.SolarData
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
