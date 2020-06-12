@@ -5,7 +5,6 @@
     tools:context=".solarData.SolarListFragment">
 
     <data>
-
         <variable
             name="hasData"
             type="boolean" />
@@ -42,15 +41,5 @@
             android:layout_centerInParent="true"
             android:gravity="center"
             android:text="List is empty. Add some data" />
-
-
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/bottomNavView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:background="?android:attr/windowBackground"
-            app:menu="@menu/solar_list_bottom_nav_menu" />
-
     </RelativeLayout>
 </layout>

@@ -2,14 +2,24 @@ package com.palak.solarimportexporttracker.solarData
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
+import android.content.Intent
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.NavController
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.NavigationUI
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.iid.FirebaseInstanceId
 import com.palak.solarimportexporttracker.R
+import com.palak.solarimportexporttracker.addData.AddSolarActivity
+import kotlinx.android.synthetic.main.activity_home.*
+
 
 /**
  * This activity holds container for fragments.
@@ -18,10 +28,22 @@ import com.palak.solarimportexporttracker.R
  */
 class HomeActivity : AppCompatActivity() {
 
+    //lateinit var binding : ActivityHomeBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        // binding = DataBindingUtil.setContentView(this,R.layout.activity_home)
         setContentView(R.layout.activity_home)
 
+        init()
+    }
+
+    private fun init() {
+
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment?
+        NavigationUI.setupWithNavController(bottomNavView, navHostFragment?.navController!!)
+
+        setSupportActionBar(toolbar)
         setupNotification()
     }
 
@@ -50,11 +72,28 @@ class HomeActivity : AppCompatActivity() {
                 // Log and toast
                 val msg = getString(R.string.msg_token_fmt, token)
                 Log.d(TAG, msg)
-                Toast.makeText(baseContext, msg, Toast.LENGTH_LONG).show()
+                //Toast.makeText(baseContext, msg, Toast.LENGTH_LONG).show()
             })
     }
 
     companion object {
         private const val TAG = "HomeActivity"
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.solar_list_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        // Handle item selection
+        return when (item.getItemId()) {
+            R.id.action_add -> {
+                val intent = Intent(this@HomeActivity,AddSolarActivity::class.java)
+                startActivity(intent)
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 }

@@ -24,8 +24,6 @@ class SolarListFragment : Fragment() {
         InjectorUtils.getSolarListViewModelFactory(requireActivity().application)
     }
     private lateinit var adapter : SolarListAdapter
-    private lateinit var navController: NavController
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,25 +32,10 @@ class SolarListFragment : Fragment() {
         binding = FragmentSolarListBinding.inflate(inflater,container,false)
         adapter = SolarListAdapter()
         binding.solarDataList.adapter = adapter
-        navController = findNavController()
 
         subscribeUi()
-        setClickListeners()
 
         return binding.root
-    }
-
-    private fun setClickListeners() {
-
-        binding.bottomNavView.setOnNavigationItemSelectedListener {
-            item ->
-            when(item.itemId){
-                R.id.btnAddSolarData -> navController.navigate(R.id.action_solarListFragment_to_addSolarFragment)
-                R.id.btnSync -> navController.navigate(R.id.action_solarListFragment_to_auth_graph)
-                R.id.btnAccount -> TODO("later!") /*navController.navigate(R.id.action_solarListFragment_to_addSolarFragment)*/
-            }
-            return@setOnNavigationItemSelectedListener true
-        }
     }
 
     private fun subscribeUi() {
