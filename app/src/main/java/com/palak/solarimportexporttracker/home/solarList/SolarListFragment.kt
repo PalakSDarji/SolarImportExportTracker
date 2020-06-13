@@ -1,4 +1,4 @@
-package com.palak.solarimportexporttracker.solarData
+package com.palak.solarimportexporttracker.home.solarList
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,9 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
-import androidx.navigation.NavController
-import androidx.navigation.fragment.findNavController
-import com.palak.solarimportexporttracker.R
 
 import com.palak.solarimportexporttracker.Utils.InjectorUtils
 import com.palak.solarimportexporttracker.databinding.FragmentSolarListBinding
@@ -30,7 +27,8 @@ class SolarListFragment : Fragment() {
         savedInstanceState: Bundle?): View? {
 
         binding = FragmentSolarListBinding.inflate(inflater,container,false)
-        adapter = SolarListAdapter()
+        adapter =
+            SolarListAdapter()
         binding.solarDataList.adapter = adapter
 
         subscribeUi()

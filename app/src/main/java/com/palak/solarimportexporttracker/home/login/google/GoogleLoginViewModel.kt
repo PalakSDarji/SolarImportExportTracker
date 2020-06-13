@@ -1,4 +1,4 @@
-package com.palak.solarimportexporttracker.solarData.login.google
+package com.palak.solarimportexporttracker.home.login.google
 
 import android.app.Application
 import android.content.Intent
@@ -15,7 +15,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 import com.palak.solarimportexporttracker.R
-import com.palak.solarimportexporttracker.solarData.login.LoginViewModel
+import com.palak.solarimportexporttracker.home.login.LoginViewModel
 
 class GoogleLoginViewModel(private val appContext: Application) : LoginViewModel(appContext) {
 

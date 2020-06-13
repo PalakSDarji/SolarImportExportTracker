@@ -1,4 +1,4 @@
-package com.palak.solarimportexporttracker.solarData
+package com.palak.solarimportexporttracker.home.solarList
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.palak.solarimportexporttracker.R
-import com.palak.solarimportexporttracker.solarData.SolarListAdapter.*
+import com.palak.solarimportexporttracker.home.solarList.SolarListAdapter.*
 import com.palak.solarimportexporttracker.databinding.ListItemSolarDataBinding
 import com.palak.solarimportexporttracker.model.SolarData
 

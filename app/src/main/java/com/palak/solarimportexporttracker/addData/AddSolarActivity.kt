@@ -9,7 +9,7 @@ import com.palak.solarimportexporttracker.R
 import com.palak.solarimportexporttracker.Utils.InjectorUtils
 import com.palak.solarimportexporttracker.Utils.hideKeyboard
 import com.palak.solarimportexporttracker.model.SolarData
-import com.palak.solarimportexporttracker.solarData.SolarListViewModel
+import com.palak.solarimportexporttracker.home.solarList.SolarListViewModel
 import kotlinx.android.synthetic.main.activity_add_solar.*
 import java.text.SimpleDateFormat
 import java.util.*

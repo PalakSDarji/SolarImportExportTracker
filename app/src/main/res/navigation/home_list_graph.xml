@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/solarList"
-        android:name="com.palak.solarimportexporttracker.solarData.SolarListFragment"
+        android:name="com.palak.solarimportexporttracker.home.solarList.SolarListFragment"
         android:label="fragment_solar_list"
         tools:layout="@layout/fragment_solar_list" />
 

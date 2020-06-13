@@ -2,9 +2,9 @@ package com.palak.solarimportexporttracker.Utils
 
 import android.app.Application
 import android.content.Context
-import com.palak.solarimportexporttracker.solarData.SolarDatabase
-import com.palak.solarimportexporttracker.solarData.SolarDataRepository
-import com.palak.solarimportexporttracker.solarData.SolarListViewModelFactory
+import com.palak.solarimportexporttracker.home.solarList.db.SolarDatabase
+import com.palak.solarimportexporttracker.home.solarList.db.SolarDataRepository
+import com.palak.solarimportexporttracker.home.solarList.SolarListViewModelFactory
 
 object InjectorUtils{
 

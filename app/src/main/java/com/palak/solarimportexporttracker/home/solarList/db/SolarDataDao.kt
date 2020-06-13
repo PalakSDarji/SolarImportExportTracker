@@ -1,4 +1,4 @@
-package com.palak.solarimportexporttracker.solarData
+package com.palak.solarimportexporttracker.home.solarList.db
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao

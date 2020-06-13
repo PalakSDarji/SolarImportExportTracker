@@ -1,4 +1,4 @@
-package com.palak.solarimportexporttracker.solarData
+package com.palak.solarimportexporttracker.home.solarList.db
 
 import android.content.Context
 import androidx.room.Database

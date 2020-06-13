@@ -1,4 +1,4 @@
-package com.palak.solarimportexporttracker.solarData
+package com.palak.solarimportexporttracker.home
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
@@ -8,17 +8,15 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.NavController
-import androidx.navigation.findNavController
+import androidx.databinding.DataBindingUtil
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.iid.FirebaseInstanceId
 import com.palak.solarimportexporttracker.R
 import com.palak.solarimportexporttracker.addData.AddSolarActivity
-import kotlinx.android.synthetic.main.activity_home.*
+import com.palak.solarimportexporttracker.databinding.ActivityHomeBinding
 
 
 /**
@@ -28,12 +26,11 @@ import kotlinx.android.synthetic.main.activity_home.*
  */
 class HomeActivity : AppCompatActivity() {
 
-    //lateinit var binding : ActivityHomeBinding
+    private lateinit var binding : ActivityHomeBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        // binding = DataBindingUtil.setContentView(this,R.layout.activity_home)
-        setContentView(R.layout.activity_home)
+        binding = DataBindingUtil.setContentView(this,R.layout.activity_home)
 
         init()
     }
@@ -41,9 +38,9 @@ class HomeActivity : AppCompatActivity() {
     private fun init() {
 
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment?
-        NavigationUI.setupWithNavController(bottomNavView, navHostFragment?.navController!!)
+        NavigationUI.setupWithNavController(binding.bottomNavView, navHostFragment?.navController!!)
 
-        setSupportActionBar(toolbar)
+        setSupportActionBar(binding.toolbar)
         setupNotification()
     }
 

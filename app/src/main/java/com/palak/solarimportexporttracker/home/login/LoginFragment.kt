@@ -1,4 +1,4 @@
-package com.palak.solarimportexporttracker.solarData.login
+package com.palak.solarimportexporttracker.home.login
 
 import android.content.Intent
 import android.os.Bundle
@@ -16,8 +16,8 @@ import com.facebook.FacebookException
 import com.facebook.login.LoginResult
 import com.google.firebase.auth.FirebaseUser
 import com.palak.solarimportexporttracker.R
-import com.palak.solarimportexporttracker.solarData.login.facebook.FacebookLoginViewModel
-import com.palak.solarimportexporttracker.solarData.login.google.GoogleLoginViewModel
+import com.palak.solarimportexporttracker.home.login.facebook.FacebookLoginViewModel
+import com.palak.solarimportexporttracker.home.login.google.GoogleLoginViewModel
 import kotlinx.android.synthetic.main.fragment_login.*
 
 /**

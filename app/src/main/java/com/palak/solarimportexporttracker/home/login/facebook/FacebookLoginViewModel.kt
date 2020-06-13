@@ -1,4 +1,4 @@
-package com.palak.solarimportexporttracker.solarData.login.facebook
+package com.palak.solarimportexporttracker.home.login.facebook
 
 import android.app.Application
 import android.content.Intent
@@ -10,7 +10,7 @@ import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FacebookAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import com.palak.solarimportexporttracker.solarData.login.LoginViewModel
+import com.palak.solarimportexporttracker.home.login.LoginViewModel
 
 class FacebookLoginViewModel(private val appContext : Application) : LoginViewModel(appContext){
 

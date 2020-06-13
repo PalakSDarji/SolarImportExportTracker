@@ -1,4 +1,4 @@
-package com.palak.solarimportexporttracker.solarData.login
+package com.palak.solarimportexporttracker.home.login
 
 import android.app.Application
 import android.content.Intent

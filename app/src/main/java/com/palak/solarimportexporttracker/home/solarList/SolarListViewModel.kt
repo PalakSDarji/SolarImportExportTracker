@@ -1,9 +1,10 @@
-package com.palak.solarimportexporttracker.solarData
+package com.palak.solarimportexporttracker.home.solarList
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
+import com.palak.solarimportexporttracker.home.solarList.db.SolarDataRepository
 import com.palak.solarimportexporttracker.model.SolarData
 import kotlinx.coroutines.launch
 
