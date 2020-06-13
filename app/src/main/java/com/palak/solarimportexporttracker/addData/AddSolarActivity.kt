@@ -5,14 +5,15 @@ import android.os.Bundle
 import android.view.MenuItem
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import com.palak.solarimportexporttracker.R
-import com.palak.solarimportexporttracker.Utils.InjectorUtils
 import com.palak.solarimportexporttracker.Utils.hideKeyboard
 import com.palak.solarimportexporttracker.model.SolarData
 import com.palak.solarimportexporttracker.home.solarList.SolarListViewModel
 import kotlinx.android.synthetic.main.activity_add_solar.*
 import java.text.SimpleDateFormat
 import java.util.*
+import javax.inject.Inject
 
 
 class AddSolarActivity : AppCompatActivity() {
@@ -32,8 +33,11 @@ class AddSolarActivity : AppCompatActivity() {
         etDate.setText(simpleDateFormat.format(cal.time))
     }
 
+    @Inject
+    lateinit var viewModelFactory : ViewModelProvider.Factory
+
     private val solarListViewModel by viewModels<SolarListViewModel> {
-        InjectorUtils.getSolarListViewModelFactory(application)
+        viewModelFactory
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

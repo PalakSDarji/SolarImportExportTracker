@@ -14,6 +14,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.iid.FirebaseInstanceId
+import com.palak.solarimportexporttracker.MyApplication
 import com.palak.solarimportexporttracker.R
 import com.palak.solarimportexporttracker.addData.AddSolarActivity
 import com.palak.solarimportexporttracker.databinding.ActivityHomeBinding
@@ -29,6 +30,7 @@ class HomeActivity : AppCompatActivity() {
     private lateinit var binding : ActivityHomeBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        (application as MyApplication).appComponent.inject(this)
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this,R.layout.activity_home)
 
