@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.palak.solarimportexporttracker.MyApplication
 
 import com.palak.solarimportexporttracker.databinding.FragmentSolarListBinding
+import com.palak.solarimportexporttracker.home.login.UserManager
 import javax.inject.Inject
 
 /**
@@ -24,15 +25,20 @@ class SolarListFragment : Fragment() {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
-    val solarListViewModel by activityViewModels<SolarListViewModel> {
-        //InjectorUtils.getSolarListViewModelFactory(requireActivity().application)
+    private val solarListViewModel by activityViewModels<SolarListViewModel> {
         viewModelFactory
     }
     private lateinit var adapter : SolarListAdapter
+    private lateinit var userManager : UserManager
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        (requireActivity().application as MyApplication).appComponent.inject(this)
+        val appComponent = (requireActivity().application as MyApplication).appComponent
+        appComponent.inject(this)
+        userManager = appComponent.userManager()
+        if(userManager.isUserLoggedIn()){
+            userManager.userComponent?.inject(this)
+        }
     }
 
     override fun onCreateView(

@@ -10,12 +10,23 @@ import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FacebookAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.database.DatabaseReference
+import com.palak.solarimportexporttracker.MyApplication
+import com.palak.solarimportexporttracker.di.UsersRef
 import com.palak.solarimportexporttracker.home.login.LoginViewModel
+import com.palak.solarimportexporttracker.home.login.UserManager
+import javax.inject.Inject
+import javax.inject.Named
 
-class FacebookLoginViewModel(private val appContext : Application) : LoginViewModel(appContext){
+class FacebookLoginViewModel @Inject constructor(val appContext : Application, @Named("UsersRef") var usersDataReff : DatabaseReference)
+    : LoginViewModel(appContext, usersDataReff){
 
     private lateinit var auth: FirebaseAuth
     private lateinit var callbackManager: CallbackManager
+
+    init {
+        (appContext as MyApplication).appComponent.inject(this)
+    }
 
     override fun initiate() {
 
@@ -45,7 +56,15 @@ class FacebookLoginViewModel(private val appContext : Application) : LoginViewMo
     }
 
     override fun getCurrentUser(): FirebaseUser? {
-        TODO("Not yet implemented")
+
+        user = auth.currentUser
+        userManager.status = if(user != null){
+            UserManager.LoginStatus.FB_LOGIN
+        } else{
+            UserManager.LoginStatus.NO_LOGIN
+        }
+
+        return user
     }
 
     override fun getSignInDetail(token: AccessToken, onCompleteLister: (Task<AuthResult>?) -> Unit) {

@@ -14,13 +14,24 @@ import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
+import com.google.firebase.database.DatabaseReference
+import com.palak.solarimportexporttracker.MyApplication
 import com.palak.solarimportexporttracker.R
+import com.palak.solarimportexporttracker.di.UsersRef
 import com.palak.solarimportexporttracker.home.login.LoginViewModel
+import com.palak.solarimportexporttracker.home.login.UserManager
+import javax.inject.Inject
+import javax.inject.Named
 
-class GoogleLoginViewModel(private val appContext: Application) : LoginViewModel(appContext) {
+class GoogleLoginViewModel @Inject constructor(val appContext: Application, @Named("UsersRef") var usersDataReff : DatabaseReference)
+    : LoginViewModel(appContext, usersDataReff) {
 
     private lateinit var auth: FirebaseAuth
     private lateinit var googleSignInClient: GoogleSignInClient
+
+    init {
+        (appContext as MyApplication).appComponent.inject(this)
+    }
 
     override fun initiate() {
 
@@ -46,7 +57,7 @@ class GoogleLoginViewModel(private val appContext: Application) : LoginViewModel
 
         // Google sign out
         onCompleteLister(googleSignInClient.signOut())
-        status = LoginStatus.NO_LOGIN
+        userManager?.status = UserManager.LoginStatus.NO_LOGIN
     }
 
     override fun getSignInDetail(data: Intent?, onCompleteLister: (Task<AuthResult>?) -> Unit) {
@@ -80,10 +91,10 @@ class GoogleLoginViewModel(private val appContext: Application) : LoginViewModel
     override fun getCurrentUser() : FirebaseUser? {
 
         user = auth.currentUser
-        status = if(user != null){
-            LoginStatus.GOOGLE_LOGIN
+        userManager.status = if(user != null){
+            UserManager.LoginStatus.GOOGLE_LOGIN
         } else{
-            LoginStatus.NO_LOGIN
+            UserManager.LoginStatus.NO_LOGIN
         }
 
         return user
@@ -94,7 +105,7 @@ class GoogleLoginViewModel(private val appContext: Application) : LoginViewModel
         auth.signOut()
         // Google revoke access
         onCompleteLister(googleSignInClient.revokeAccess())
-        status = LoginStatus.NO_LOGIN
+        userManager.status = UserManager.LoginStatus.NO_LOGIN
     }
 
     companion object {

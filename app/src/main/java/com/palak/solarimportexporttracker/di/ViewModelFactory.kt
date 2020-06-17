@@ -17,6 +17,9 @@ package com.palak.solarimportexporttracker.di
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.palak.solarimportexporttracker.home.login.LoginViewModel
+import com.palak.solarimportexporttracker.home.login.facebook.FacebookLoginViewModel
+import com.palak.solarimportexporttracker.home.login.google.GoogleLoginViewModel
 import com.palak.solarimportexporttracker.home.solarList.SolarListViewModel
 import dagger.Binds
 import dagger.MapKey
@@ -67,6 +70,16 @@ abstract class ViewModelBuilderModule {
     @IntoMap
     @ViewModelKey(SolarListViewModel::class)
     abstract fun bindSolarListViewModel(solarListViewModel: SolarListViewModel) : ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(GoogleLoginViewModel::class)
+    abstract fun bindGoogleLoginViewModel(loginViewModel: GoogleLoginViewModel) : ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(FacebookLoginViewModel::class)
+    abstract fun bindFbLoginViewModel(loginViewModel: FacebookLoginViewModel) : ViewModel
 }
 
 @Target(

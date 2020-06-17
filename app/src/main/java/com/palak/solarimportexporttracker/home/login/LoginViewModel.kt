@@ -3,19 +3,23 @@ package com.palak.solarimportexporttracker.home.login
 import android.app.Application
 import android.content.Intent
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.facebook.AccessToken
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.database.DatabaseReference
+import com.palak.solarimportexporttracker.MyApplication
+import com.palak.solarimportexporttracker.di.SolarDataRef
+import com.palak.solarimportexporttracker.di.UsersRef
+import com.palak.solarimportexporttracker.model.User
+import javax.inject.Inject
+import javax.inject.Named
 
-abstract class LoginViewModel(application: Application) : AndroidViewModel(application) {
+abstract class LoginViewModel(application: Application,@Named("UsersRef") var usersDataRef : DatabaseReference) : AndroidViewModel(application) {
 
-    enum class LoginStatus {
-        GOOGLE_LOGIN, FB_LOGIN, NO_LOGIN
-    }
-
-    open var status =
-        LoginStatus.NO_LOGIN
+    var userManager : UserManager = (application as MyApplication).appComponent.userManager()
     open var user : FirebaseUser? = null
 
     open fun initiate() {}
@@ -25,4 +29,23 @@ abstract class LoginViewModel(application: Application) : AndroidViewModel(appli
     open fun signOut(onCompleteLister : (Task<Void>) -> Unit) {}
     open fun revokeAccess(onCompleteLister : (Task<Void>) -> Unit) {}
     abstract fun getCurrentUser() : FirebaseUser?
+
+    /**
+     * Sync the user with firebase realtime database, uid as node. If already sync, it doesnt mind to sync twice.
+     */
+    fun syncUserToFirebaseDatabase(firebaseUser : FirebaseUser?){
+        if(firebaseUser != null) {
+            firebaseUser.apply {
+                val userObject = User(uid,displayName,email,providerId)
+                usersDataRef.child(uid).setValue(userObject)
+                userManager.updateCurrentUser(userObject)
+
+            }
+        }
+        else{
+            user = null
+            userManager.updateCurrentUser(null)
+        }
+
+    }
 }

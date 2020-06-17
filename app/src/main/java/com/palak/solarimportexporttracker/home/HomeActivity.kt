@@ -18,6 +18,7 @@ import com.palak.solarimportexporttracker.MyApplication
 import com.palak.solarimportexporttracker.R
 import com.palak.solarimportexporttracker.addData.AddSolarActivity
 import com.palak.solarimportexporttracker.databinding.ActivityHomeBinding
+import com.palak.solarimportexporttracker.home.login.UserManager
 
 
 /**
@@ -28,11 +29,18 @@ import com.palak.solarimportexporttracker.databinding.ActivityHomeBinding
 class HomeActivity : AppCompatActivity() {
 
     private lateinit var binding : ActivityHomeBinding
+    private lateinit var userManager: UserManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        (application as MyApplication).appComponent.inject(this)
+        val appComponent = (application as MyApplication).appComponent
+        appComponent.inject(this)
+        userManager = appComponent.userManager()
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this,R.layout.activity_home)
+
+        if(userManager.isUserLoggedIn()){
+           userManager.userComponent?.inject(this)
+        }
 
         init()
     }
