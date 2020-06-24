@@ -3,6 +3,7 @@ package com.palak.solarimportexporttracker.home.login.facebook
 import android.app.Application
 import android.content.Intent
 import android.util.Log
+import androidx.hilt.lifecycle.ViewModelInject
 import com.facebook.AccessToken
 import com.facebook.CallbackManager
 import com.google.android.gms.tasks.Task
@@ -15,18 +16,17 @@ import com.palak.solarimportexporttracker.MyApplication
 import com.palak.solarimportexporttracker.di.UsersRef
 import com.palak.solarimportexporttracker.home.login.LoginViewModel
 import com.palak.solarimportexporttracker.home.login.UserManager
+import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 import javax.inject.Named
 
-class FacebookLoginViewModel @Inject constructor(val appContext : Application, @Named("UsersRef") var usersDataReff : DatabaseReference)
-    : LoginViewModel(appContext, usersDataReff){
+class FacebookLoginViewModel @ViewModelInject constructor(val appContext : Application,
+                                                          @UsersRef var usersDataReff : DatabaseReference, userManager: UserManager)
+    : LoginViewModel(appContext, usersDataReff,userManager){
 
-    private lateinit var auth: FirebaseAuth
+    private var auth: FirebaseAuth? = null
     private lateinit var callbackManager: CallbackManager
-
-    init {
-        (appContext as MyApplication).appComponent.inject(this)
-    }
 
     override fun initiate() {
 
@@ -48,7 +48,9 @@ class FacebookLoginViewModel @Inject constructor(val appContext : Application, @
     }
 
     override fun signOut(onCompleteLister: (Task<Void>) -> Unit) {
-        TODO("Not yet implemented")
+        auth?.signOut()
+        userManager.status = UserManager.LoginStatus.NO_LOGIN
+        userManager.currentUser.value = null
     }
 
     override fun revokeAccess(onCompleteLister: (Task<Void>) -> Unit) {
@@ -57,7 +59,7 @@ class FacebookLoginViewModel @Inject constructor(val appContext : Application, @
 
     override fun getCurrentUser(): FirebaseUser? {
 
-        user = auth.currentUser
+        user = auth!!.currentUser
         userManager.status = if(user != null){
             UserManager.LoginStatus.FB_LOGIN
         } else{
@@ -72,6 +74,6 @@ class FacebookLoginViewModel @Inject constructor(val appContext : Application, @
 
         val credential = FacebookAuthProvider.getCredential(token.token)
 
-        onCompleteLister(auth.signInWithCredential(credential))
+        onCompleteLister(auth!!.signInWithCredential(credential))
     }
 }

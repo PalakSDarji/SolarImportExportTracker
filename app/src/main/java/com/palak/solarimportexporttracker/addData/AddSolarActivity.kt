@@ -11,12 +11,13 @@ import com.palak.solarimportexporttracker.R
 import com.palak.solarimportexporttracker.Utils.hideKeyboard
 import com.palak.solarimportexporttracker.model.SolarData
 import com.palak.solarimportexporttracker.home.solarList.SolarListViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_add_solar.*
 import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
 
-
+@AndroidEntryPoint
 class AddSolarActivity : AppCompatActivity() {
 
     var cal = Calendar.getInstance()
@@ -34,16 +35,10 @@ class AddSolarActivity : AppCompatActivity() {
         etDate.setText(simpleDateFormat.format(cal.time))
     }
 
-    @Inject
-    lateinit var viewModelFactory : ViewModelProvider.Factory
-
-    private val solarListViewModel by viewModels<SolarListViewModel> {
-        viewModelFactory
-    }
+    private val solarListViewModel : SolarListViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
-        (application as MyApplication).appComponent.inject(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_solar)
 
@@ -60,9 +55,13 @@ class AddSolarActivity : AppCompatActivity() {
             solarData.importdata = etImport.text.toString()
             solarData.export = etExport.text.toString()
 
-            solarListViewModel.insertSolarData(solarData)
-            hideKeyboard()
-            finish()
+            solarListViewModel.insertSolarData(solarData).observe(this, androidx.lifecycle.Observer { id ->
+                if(id>0){
+                    hideKeyboard()
+                    finish()
+                }
+            })
+
         }
 
         etDate.setOnClickListener {

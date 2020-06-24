@@ -14,12 +14,15 @@ import com.palak.solarimportexporttracker.MyApplication
 import com.palak.solarimportexporttracker.di.SolarDataRef
 import com.palak.solarimportexporttracker.di.UsersRef
 import com.palak.solarimportexporttracker.model.User
+import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 import javax.inject.Named
 
-abstract class LoginViewModel(application: Application,@Named("UsersRef") var usersDataRef : DatabaseReference) : AndroidViewModel(application) {
+abstract class LoginViewModel(application: Application,
+                              @UsersRef var usersDataRef : DatabaseReference,
+                              var userManager : UserManager) : AndroidViewModel(application) {
 
-    var userManager : UserManager = (application as MyApplication).appComponent.userManager()
     open var user : FirebaseUser? = null
 
     open fun initiate() {}

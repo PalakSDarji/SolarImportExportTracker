@@ -6,6 +6,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.palak.solarimportexporttracker.model.SolarData
+import kotlinx.coroutines.Deferred
 
 @Dao
 interface SolarDataDao {
@@ -14,5 +15,5 @@ interface SolarDataDao {
     fun fetchSolarData() : LiveData<List<SolarData>>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insertSolarData(solarData: SolarData)
+    suspend fun insertSolarData(solarData: SolarData) : Long
 }

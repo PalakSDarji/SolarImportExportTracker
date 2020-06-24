@@ -17,76 +17,75 @@ import com.facebook.FacebookCallback
 import com.facebook.FacebookException
 import com.facebook.login.LoginResult
 import com.google.firebase.auth.FirebaseUser
-import com.palak.solarimportexporttracker.MyApplication
 import com.palak.solarimportexporttracker.R
+import com.palak.solarimportexporttracker.databinding.FragmentLoginBinding
 import com.palak.solarimportexporttracker.home.login.facebook.FacebookLoginViewModel
 import com.palak.solarimportexporttracker.home.login.google.GoogleLoginViewModel
 import com.palak.solarimportexporttracker.model.User
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_login.*
 import javax.inject.Inject
 
 /**
  * Do firebase login and registration here.
  */
+@AndroidEntryPoint
 class LoginFragment : Fragment(), View.OnClickListener {
 
+    private lateinit var binding : FragmentLoginBinding
+
+    private var loginViewModel: LoginViewModel? = null
+
     @Inject
-    lateinit var viewModelFactory : ViewModelProvider.Factory
-
-    var loginViewModel: LoginViewModel? = null
-
-    private lateinit var navController: NavController
-    private lateinit var userManager: UserManager
+    lateinit var userManager: UserManager
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_login, container, false)
-    }
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        val appComponent = (requireActivity().application as MyApplication).appComponent
-        appComponent.inject(this)
-        userManager = appComponent.userManager()
-        userManager.userComponent?.inject(this)
+        binding = FragmentLoginBinding.inflate(layoutInflater,container,false)
+
+        // Inflate the layout for this fragment
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        navController = findNavController()
 
         signInButton.setOnClickListener(this)
         fbLoginButton.setPermissions("email", "public_profile")
         signOutButton.setOnClickListener(this)
         disconnectButton.setOnClickListener(this)
 
+        when(userManager.status){
+            UserManager.LoginStatus.GOOGLE_LOGIN ->
+                loginViewModel = ViewModelProvider(requireActivity()).get(GoogleLoginViewModel::class.java)
+            UserManager.LoginStatus.FB_LOGIN ->
+                loginViewModel = ViewModelProvider(requireActivity()).get(FacebookLoginViewModel::class.java)
+        }
+        observeUser()
 
     }
 
     override fun onClick(v: View) {
         when (v.id) {
             R.id.signInButton -> {
-                loginViewModel = ViewModelProvider(requireActivity(),viewModelFactory).get(GoogleLoginViewModel::class.java)
+                loginViewModel = ViewModelProvider(requireActivity()).get(GoogleLoginViewModel::class.java)
 
                 loginViewModel?.apply {
                     initiate()
-                    observeUser()
                     signIn { signInIntent ->
                         startActivityForResult(signInIntent, GoogleLoginViewModel.RC_SIGN_IN)
                     }
                 }
             }
             R.id.fbLoginButton -> {
-                loginViewModel = ViewModelProvider(requireActivity(),viewModelFactory).get(FacebookLoginViewModel::class.java)
+                loginViewModel = ViewModelProvider(requireActivity()).get(FacebookLoginViewModel::class.java)
 
                 loginViewModel?.apply {
                     this as FacebookLoginViewModel
                     initiate()
-                    observeUser()
                     fbLoginButton.registerCallback(fbSignIn(), object : FacebookCallback<LoginResult>{
                         override fun onSuccess(result: LoginResult) {
                             getSignInDetail(result.accessToken) { task ->
@@ -135,7 +134,6 @@ class LoginFragment : Fragment(), View.OnClickListener {
     private fun updateLoginStatus(user: FirebaseUser?){
         user?.let {
             //User is not null.
-            userManager.userComponent?.inject(this)
             loginViewModel!!.syncUserToFirebaseDatabase(user)
         } ?: run {
             //user is null.
@@ -144,24 +142,23 @@ class LoginFragment : Fragment(), View.OnClickListener {
     }
 
     private fun observeUser() {
-        userManager?.let {
-            it.currentUser.observe(viewLifecycleOwner, Observer {
+        userManager.currentUser.observe(viewLifecycleOwner, Observer {
                 user ->
-                updateUserUI(user)
-            })
-        }
+            updateUserUI(user)
+        })
     }
 
-    private fun updateUserUI(user: User) {
+    private fun updateUserUI(user: User?) {
+        binding.viewModel = loginViewModel
         if (user != null) {
-
+            binding.userName = user.name
             Toast.makeText(requireContext(),"User: ${user.name}", Toast.LENGTH_LONG).show()
         } else {
             Toast.makeText(requireContext(),"User is signed out!", Toast.LENGTH_LONG).show()
         }
     }
 
-    public override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
         // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);

@@ -4,6 +4,7 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'com.google.gms.google-services'
 apply plugin: "scabbard.gradle"
+apply plugin: 'dagger.hilt.android.plugin'
 
 
 android {
@@ -101,10 +102,14 @@ dependencies {
     debugImplementation 'com.amitshekhar.android:debug-db:1.0.6'
 
     //dagger
-    def dagger_version = "2.28"
-    api "com.google.dagger:dagger:$dagger_version"
-    kapt "com.google.dagger:dagger-compiler:$dagger_version"
-    api "com.google.dagger:dagger-android-support:$dagger_version" // if you use the support libraries
-    kapt "com.google.dagger:dagger-android-processor:$dagger_version"
+    api "com.google.dagger:dagger:$rootProject.dagger_version"
+    kapt "com.google.dagger:dagger-compiler:$rootProject.dagger_version"
+    api "com.google.dagger:dagger-android-support:$rootProject.dagger_version" // if you use the support libraries
+    kapt "com.google.dagger:dagger-android-processor:$rootProject.dagger_version"
 
+    //Hilt
+    implementation "com.google.dagger:hilt-android:2.28-alpha"
+    kapt "com.google.dagger:hilt-android-compiler:2.28-alpha"
+    implementation "androidx.hilt:hilt-lifecycle-viewmodel:$rootProject.hilt_jetpack_version"
+    kapt "androidx.hilt:hilt-compiler:$rootProject.hilt_jetpack_version"
 }

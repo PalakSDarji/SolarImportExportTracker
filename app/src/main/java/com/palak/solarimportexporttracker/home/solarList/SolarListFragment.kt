@@ -13,33 +13,20 @@ import com.palak.solarimportexporttracker.MyApplication
 
 import com.palak.solarimportexporttracker.databinding.FragmentSolarListBinding
 import com.palak.solarimportexporttracker.home.login.UserManager
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 /**
  * This screen shows list of import exports of solar power date wise.
  */
+@AndroidEntryPoint
 class SolarListFragment : Fragment() {
 
     private lateinit var binding : FragmentSolarListBinding
 
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
+    private val solarListViewModel : SolarListViewModel by activityViewModels()
 
-    private val solarListViewModel by activityViewModels<SolarListViewModel> {
-        viewModelFactory
-    }
     private lateinit var adapter : SolarListAdapter
-    private lateinit var userManager : UserManager
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        val appComponent = (requireActivity().application as MyApplication).appComponent
-        appComponent.inject(this)
-        userManager = appComponent.userManager()
-        if(userManager.isUserLoggedIn()){
-            userManager.userComponent?.inject(this)
-        }
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

@@ -9,16 +9,12 @@ import android.util.Log
 import androidx.multidex.MultiDexApplication
 import com.facebook.FacebookSdk
 import com.facebook.appevents.AppEventsLogger
-import com.palak.solarimportexporttracker.di.AppComponent
-import com.palak.solarimportexporttracker.di.DaggerAppComponent
+import dagger.hilt.android.HiltAndroidApp
 import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
 
+@HiltAndroidApp
 class MyApplication : MultiDexApplication() {
-
-    val appComponent : AppComponent by lazy {
-        DaggerAppComponent.factory().create(this)
-    }
 
     override fun onCreate() {
         super.onCreate()

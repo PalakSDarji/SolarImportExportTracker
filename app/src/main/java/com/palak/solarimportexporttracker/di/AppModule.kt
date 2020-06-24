@@ -11,13 +11,17 @@ import com.palak.solarimportexporttracker.home.solarList.db.SolarDataDao
 import com.palak.solarimportexporttracker.home.solarList.db.SolarDatabase
 import com.palak.solarimportexporttracker.storage.SharedPreferencesStorage
 import com.palak.solarimportexporttracker.storage.Storage
+import dagger.Binds
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ApplicationComponent
 import javax.inject.Named
 import javax.inject.Qualifier
 import javax.inject.Singleton
 
 @Module
+@InstallIn(ApplicationComponent::class)
 class AppModule {
 
     @Singleton
@@ -40,16 +44,18 @@ class AppModule {
 
     @Singleton
     @Provides
-    @Named("UsersRef")
+    //@Named("UsersRef")
+    @UsersRef
     fun provideFirebaseDatabaseUsersReference(firebaseDatabase: FirebaseDatabase) : DatabaseReference{
         return firebaseDatabase.getReference("users")
     }
 
-    @Provides
-    @Named("SolarDataRef")
+    /*@Provides
+    //@Named("SolarDataRef")
+    @SolarDataRef
     fun provideFirebaseDatabaseSolarDataReference(firebaseDatabase: FirebaseDatabase) : DatabaseReference {
         return firebaseDatabase.getReference("solarData")
-    }
+    }*/
 
     @Singleton
     @Provides
@@ -68,7 +74,6 @@ class AppModule {
     fun provideStorage(application: Application, gson : Gson) : Storage {
         return SharedPreferencesStorage(application.applicationContext,gson)
     }
-
 }
 
 @Qualifier
