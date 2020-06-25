@@ -24,4 +24,9 @@
     <string name="msg_token_fmt" translatable="false">InstanceID Token: %s</string>
     <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
     <string name="txt_data">Data</string>
+    <string name="str_add">Add</string>
+    <string name="hi_welcome">Hi, Welcome!</string>
+    <string name="header">Track daily Import/Export\nof your Solar Cell</string>
+    <string name="tvImport">Import</string>
+    <string name="tvExport">Export</string>
 </resources>
