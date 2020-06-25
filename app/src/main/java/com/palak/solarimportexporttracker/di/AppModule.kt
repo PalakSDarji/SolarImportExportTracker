@@ -44,18 +44,10 @@ class AppModule {
 
     @Singleton
     @Provides
-    //@Named("UsersRef")
     @UsersRef
     fun provideFirebaseDatabaseUsersReference(firebaseDatabase: FirebaseDatabase) : DatabaseReference{
         return firebaseDatabase.getReference("users")
     }
-
-    /*@Provides
-    //@Named("SolarDataRef")
-    @SolarDataRef
-    fun provideFirebaseDatabaseSolarDataReference(firebaseDatabase: FirebaseDatabase) : DatabaseReference {
-        return firebaseDatabase.getReference("solarData")
-    }*/
 
     @Singleton
     @Provides
