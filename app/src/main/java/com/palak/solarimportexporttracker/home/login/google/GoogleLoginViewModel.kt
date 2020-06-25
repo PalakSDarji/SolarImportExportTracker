@@ -1,27 +1,36 @@
-package com.palak.solarimportexporttracker.viewmodel
+package com.palak.solarimportexporttracker.home.login.google
 
 import android.app.Application
 import android.content.Intent
 import android.util.Log
-import androidx.lifecycle.LiveData
+import androidx.hilt.lifecycle.ViewModelInject
 import com.facebook.AccessToken
-import com.facebook.CallbackManager
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
-import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
+import com.google.firebase.database.DatabaseReference
+import com.palak.solarimportexporttracker.MyApplication
 import com.palak.solarimportexporttracker.R
+import com.palak.solarimportexporttracker.di.UsersRef
+import com.palak.solarimportexporttracker.home.login.LoginViewModel
+import com.palak.solarimportexporttracker.home.login.UserManager
+import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.qualifiers.ApplicationContext
+import javax.inject.Inject
+import javax.inject.Named
 
-class GoogleLoginViewModel(private val appContext: Application) : LoginViewModel(appContext) {
+class GoogleLoginViewModel @ViewModelInject constructor(val appContext: Application,
+                                                        @UsersRef var usersDataReff : DatabaseReference, userManager: UserManager)
+    : LoginViewModel(appContext, usersDataReff,userManager) {
 
-    private lateinit var auth: FirebaseAuth
+    private var auth: FirebaseAuth? = null
     private lateinit var googleSignInClient: GoogleSignInClient
 
     override fun initiate() {
@@ -44,11 +53,14 @@ class GoogleLoginViewModel(private val appContext: Application) : LoginViewModel
 
     override fun signOut(onCompleteLister : (Task<Void>) -> Unit) {
         // Firebase sign out
-        auth.signOut()
 
-        // Google sign out
-        onCompleteLister(googleSignInClient.signOut())
-        status = LoginStatus.NO_LOGIN
+        auth?.let{
+            it.signOut()
+            // Google sign out
+            onCompleteLister(googleSignInClient.signOut())
+        }
+        userManager.status = UserManager.LoginStatus.NO_LOGIN
+        userManager.currentUser.value = null
     }
 
     override fun getSignInDetail(data: Intent?, onCompleteLister: (Task<AuthResult>?) -> Unit) {
@@ -76,16 +88,16 @@ class GoogleLoginViewModel(private val appContext: Application) : LoginViewModel
         Log.d(TAG, "firebaseAuthWithGoogle:" + acct.id!!)
 
         val credential = GoogleAuthProvider.getCredential(acct.idToken, null)
-        onCompleteLister(auth.signInWithCredential(credential))
+        onCompleteLister(auth!!.signInWithCredential(credential))
     }
 
     override fun getCurrentUser() : FirebaseUser? {
 
-        user = auth.currentUser
-        status = if(user != null){
-            LoginStatus.GOOGLE_LOGIN
+        user = auth!!.currentUser
+        userManager.status = if(user != null){
+            UserManager.LoginStatus.GOOGLE_LOGIN
         } else{
-            LoginStatus.NO_LOGIN
+            UserManager.LoginStatus.NO_LOGIN
         }
 
         return user
@@ -93,10 +105,12 @@ class GoogleLoginViewModel(private val appContext: Application) : LoginViewModel
 
     override fun revokeAccess(onCompleteLister: (Task<Void>) -> Unit) {
         // Firebase sign out
-        auth.signOut()
-        // Google revoke access
-        onCompleteLister(googleSignInClient.revokeAccess())
-        status = LoginStatus.NO_LOGIN
+        auth?.let {
+            it.signOut()
+            // Google revoke access
+            onCompleteLister(googleSignInClient.revokeAccess())
+        }
+        userManager.status = UserManager.LoginStatus.NO_LOGIN
     }
 
     companion object {

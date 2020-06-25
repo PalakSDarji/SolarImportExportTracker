@@ -15,7 +15,7 @@ import androidx.work.WorkManager*/
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import com.palak.solarimportexporttracker.R
-import com.palak.solarimportexporttracker.ui.activities.HomeActivity
+import com.palak.solarimportexporttracker.home.HomeActivity
 
 class MyFirebaseMessagingService : FirebaseMessagingService() {
 

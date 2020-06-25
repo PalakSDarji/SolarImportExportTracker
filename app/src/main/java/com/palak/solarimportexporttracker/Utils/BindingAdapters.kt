@@ -1,4 +1,4 @@
-package com.palak.solarimportexporttracker.adapter
+package com.palak.solarimportexporttracker.Utils
 
 import android.view.View
 import androidx.databinding.BindingAdapter

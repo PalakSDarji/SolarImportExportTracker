@@ -1,4 +1,4 @@
-package com.palak.solarimportexporttracker.ui
+package com.palak.solarimportexporttracker
 
 import android.app.Application
 import android.content.Context
@@ -9,9 +9,11 @@ import android.util.Log
 import androidx.multidex.MultiDexApplication
 import com.facebook.FacebookSdk
 import com.facebook.appevents.AppEventsLogger
+import dagger.hilt.android.HiltAndroidApp
 import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
 
+@HiltAndroidApp
 class MyApplication : MultiDexApplication() {
 
     override fun onCreate() {

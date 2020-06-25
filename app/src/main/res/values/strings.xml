@@ -13,9 +13,9 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
-    <string name="txt_add_data">Add Data</string>
+    <string name="txt_add_data">Add</string>
     <string name="txt_account">Account</string>
-    <string name="txt_sync">Sync Data</string>
+    <string name="txt_sync">Sync</string>
 
     <string name="facebook_app_id">691623254993118</string>
     <string name="fb_login_protocol_scheme">fb691623254993118</string>
@@ -23,4 +23,5 @@
     <string name="default_notification_channel_name" translatable="true">Weather</string>
     <string name="msg_token_fmt" translatable="false">InstanceID Token: %s</string>
     <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
+    <string name="txt_data">Data</string>
 </resources>

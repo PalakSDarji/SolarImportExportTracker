@@ -3,24 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/home_list_graph"
-    app:startDestination="@id/solarListFragment">
+    app:startDestination="@id/solarList">
 
     <fragment
-        android:id="@+id/solarListFragment"
-        android:name="com.palak.solarimportexporttracker.ui.fragments.SolarListFragment"
+        android:id="@+id/solarList"
+        android:name="com.palak.solarimportexporttracker.home.solarList.SolarListFragment"
         android:label="fragment_solar_list"
-        tools:layout="@layout/fragment_solar_list" >
-        <action
-            android:id="@+id/action_solarListFragment_to_addSolarFragment"
-            app:destination="@id/addSolarFragment" />
-        <action
-            android:id="@+id/action_solarListFragment_to_auth_graph"
-            app:destination="@id/auth_graph" />
-    </fragment>
-    <fragment
-        android:id="@+id/addSolarFragment"
-        android:name="com.palak.solarimportexporttracker.ui.fragments.AddSolarFragment"
-        android:label="fragment_add_solar"
-        tools:layout="@layout/fragment_add_solar" />
+        tools:layout="@layout/fragment_solar_list" />
+
     <include app:graph="@navigation/auth_graph" />
+
+
 </navigation>
