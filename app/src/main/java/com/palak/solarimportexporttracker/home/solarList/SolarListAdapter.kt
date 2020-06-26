@@ -78,8 +78,10 @@ class SolarListAdapter : ListAdapter<Any, RecyclerView.ViewHolder>(SolarDataDiff
             with(binding){
                 solarData = solarDataItem
                 executePendingBindings()
-                if(solarDataItem.export < solarDataItem.importdata){
-                    val diff =  solarDataItem.importdata.toInt() - solarDataItem.export.toInt()
+                val exportData = solarDataItem.export.toInt()
+                val importData = solarDataItem.importdata.toInt()
+                if(exportData < importData){
+                    val diff =  importData - exportData
                     diff.also {
                         binding.tvDiff.visibility = View.VISIBLE
                         if (it == 1){
@@ -90,8 +92,8 @@ class SolarListAdapter : ListAdapter<Any, RecyclerView.ViewHolder>(SolarDataDiff
                         }
                     }
                 }
-                else if(solarDataItem.importdata < solarDataItem.export){
-                    val diff =  solarDataItem.export.toInt() - solarDataItem.importdata.toInt()
+                else if(importData < exportData){
+                    val diff =  exportData - importData
                     diff.also {
                         binding.tvDiff.visibility = View.VISIBLE
                         if (it == 1){
@@ -103,6 +105,7 @@ class SolarListAdapter : ListAdapter<Any, RecyclerView.ViewHolder>(SolarDataDiff
                     }
                 }
                 else{
+                    binding.tvDiff.text = ""
                     binding.tvDiff.visibility = View.GONE
                 }
             }

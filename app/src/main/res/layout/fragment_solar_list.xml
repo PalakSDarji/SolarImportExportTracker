@@ -5,6 +5,7 @@
     tools:context=".home.solarList.SolarListFragment">
 
     <data>
+
         <variable
             name="hasData"
             type="boolean" />
@@ -73,9 +74,9 @@
                     android:id="@+id/tvHi"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
                     android:fontFamily="@font/calibrib"
                     android:text="@string/hi_welcome"
-                    android:layout_marginTop="15dp"
                     android:textColor="#8A8A8A"
                     android:textSize="18sp" />
 
@@ -103,29 +104,46 @@
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
 
-<!--
+        <!--
 
-        <View
-            android:background="@drawable/view_fadder_bg"
-            android:id="@+id/viewFadder"
-            android:layout_width="match_parent"
-            android:layout_height="25dp"
-            android:layout_marginTop="14dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/imgProfile" />
--->
+                <View
+                    android:background="@drawable/view_fadder_bg"
+                    android:id="@+id/viewFadder"
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp"
+                    android:layout_marginTop="14dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/imgProfile" />
+        -->
 
-
-        <androidx.appcompat.widget.AppCompatTextView
+        <LinearLayout
+            android:id="@+id/llEmptySolar"
             isGone="@{hasData}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="List is empty. Add some data"
+            android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center"
+                android:src="@drawable/solar_icon_empty" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/calibri"
+                android:gravity="center"
+                android:text="Add some data,\nthen you will see!"
+                android:textColor="@color/colorPrimaryLight"
+                android:textSize="25sp" />
+
+        </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
