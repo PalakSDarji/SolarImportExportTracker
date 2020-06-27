@@ -54,7 +54,7 @@ class AppModule {
     @Provides
     @InSDF
     fun provideInSdf() : SimpleDateFormat{
-        return SimpleDateFormat("dd/MM/yyyy")
+        return SimpleDateFormat("dd/MM/yyyy HH:mm")
     }
 
     @Singleton
@@ -62,6 +62,13 @@ class AppModule {
     @OutSDF
     fun provideOutSdf() : SimpleDateFormat{
         return SimpleDateFormat("MMM dd, yyyy")
+    }
+
+    @Singleton
+    @Provides
+    @SdfTime
+    fun provideSdfTime() : SimpleDateFormat{
+        return SimpleDateFormat("hh:mm a")
     }
 
     @Singleton
@@ -98,3 +105,7 @@ annotation class InSDF
 @Qualifier
 @Retention(AnnotationRetention.BINARY)
 annotation class OutSDF
+
+@Qualifier
+@Retention(AnnotationRetention.BINARY)
+annotation class SdfTime

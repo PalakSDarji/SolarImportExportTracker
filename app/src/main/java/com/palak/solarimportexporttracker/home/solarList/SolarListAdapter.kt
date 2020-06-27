@@ -12,10 +12,14 @@ import com.palak.solarimportexporttracker.R
 import com.palak.solarimportexporttracker.databinding.ItemDateBinding
 import com.palak.solarimportexporttracker.home.solarList.SolarListAdapter.*
 import com.palak.solarimportexporttracker.databinding.ListItemSolarDataBinding
+import com.palak.solarimportexporttracker.di.SdfTime
 import com.palak.solarimportexporttracker.home.solarList.model.DateHeader
 import com.palak.solarimportexporttracker.model.SolarData
+import dagger.hilt.android.AndroidEntryPoint
+import java.text.SimpleDateFormat
+import javax.inject.Inject
 
-class SolarListAdapter : ListAdapter<Any, RecyclerView.ViewHolder>(SolarDataDiffCallback()) {
+class SolarListAdapter(private val sdfTime: SimpleDateFormat, private val inSdf : SimpleDateFormat) : ListAdapter<Any, RecyclerView.ViewHolder>(SolarDataDiffCallback()) {
 
     companion object {
         private const val TYPE_DATE = 0
@@ -33,7 +37,7 @@ class SolarListAdapter : ListAdapter<Any, RecyclerView.ViewHolder>(SolarDataDiff
             )
         }
         else {
-            return SolarViewHolder(
+            return SolarViewHolder(sdfTime, inSdf,
                 DataBindingUtil.inflate(
                     LayoutInflater.from(parent.context),
                     R.layout.list_item_solar_data, parent, false
@@ -71,7 +75,7 @@ class SolarListAdapter : ListAdapter<Any, RecyclerView.ViewHolder>(SolarDataDiff
         }
     }
 
-    class SolarViewHolder(private val binding: ListItemSolarDataBinding) :
+    class SolarViewHolder(val sdfTime : SimpleDateFormat, val inSdf : SimpleDateFormat, val binding: ListItemSolarDataBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(solarDataItem : SolarData){
@@ -108,6 +112,8 @@ class SolarListAdapter : ListAdapter<Any, RecyclerView.ViewHolder>(SolarDataDiff
                     binding.tvDiff.text = ""
                     binding.tvDiff.visibility = View.GONE
                 }
+
+                binding.tvTime.text =  sdfTime.format(inSdf.parse(solarDataItem.date))
             }
         }
     }

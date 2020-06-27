@@ -18,6 +18,7 @@ import com.palak.solarimportexporttracker.Utils.mutateIndexed
 import com.palak.solarimportexporttracker.databinding.FragmentSolarListBinding
 import com.palak.solarimportexporttracker.di.InSDF
 import com.palak.solarimportexporttracker.di.OutSDF
+import com.palak.solarimportexporttracker.di.SdfTime
 import com.palak.solarimportexporttracker.home.login.UserManager
 import com.palak.solarimportexporttracker.home.solarList.model.DateHeader
 import dagger.hilt.android.AndroidEntryPoint
@@ -47,6 +48,10 @@ class SolarListFragment : Fragment() {
     lateinit var outSdf : SimpleDateFormat
 
     @Inject
+    @SdfTime
+    lateinit var sdfTime : SimpleDateFormat
+
+    @Inject
     lateinit var userManager: UserManager
 
     override fun onCreateView(
@@ -54,7 +59,7 @@ class SolarListFragment : Fragment() {
         savedInstanceState: Bundle?): View? {
 
         binding = FragmentSolarListBinding.inflate(inflater,container,false)
-        adapter = SolarListAdapter()
+        adapter = SolarListAdapter(sdfTime,inSdf)
         binding.solarDataList.adapter = adapter
 
         navController = findNavController()
