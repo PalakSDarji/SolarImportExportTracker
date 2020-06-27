@@ -2,9 +2,16 @@ package com.palak.solarimportexporttracker.Utils
 
 import android.app.Activity
 import android.content.Context
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import androidx.annotation.NonNull
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavController
+import androidx.navigation.NavOptions
+import androidx.navigation.ui.NavigationUI
+import com.palak.solarimportexporttracker.R
 
 fun Fragment.hideKeyboard() {
     view?.let { activity?.hideKeyboard(it) }

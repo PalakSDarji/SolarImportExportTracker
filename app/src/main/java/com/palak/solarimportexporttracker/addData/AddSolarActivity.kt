@@ -9,6 +9,8 @@ import androidx.lifecycle.ViewModelProvider
 import com.palak.solarimportexporttracker.MyApplication
 import com.palak.solarimportexporttracker.R
 import com.palak.solarimportexporttracker.Utils.hideKeyboard
+import com.palak.solarimportexporttracker.di.InSDF
+import com.palak.solarimportexporttracker.di.OutSDF
 import com.palak.solarimportexporttracker.model.SolarData
 import com.palak.solarimportexporttracker.home.solarList.SolarListViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -22,6 +24,14 @@ class AddSolarActivity : AppCompatActivity() {
 
     var cal = Calendar.getInstance()
 
+    @Inject
+    @InSDF
+    lateinit var inSdf : SimpleDateFormat
+
+    @Inject
+    @OutSDF
+    lateinit var outSdf : SimpleDateFormat
+
     val dateSetListener =
         DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
             cal.set(Calendar.YEAR, year)
@@ -31,8 +41,7 @@ class AddSolarActivity : AppCompatActivity() {
         }
 
     private fun addDateToView() {
-        val simpleDateFormat = SimpleDateFormat("dd/MM/yyyy")
-        etDate.setText(simpleDateFormat.format(cal.time))
+        etDate.setText(outSdf.format(cal.time))
     }
 
     private val solarListViewModel : SolarListViewModel by viewModels()
@@ -42,16 +51,13 @@ class AddSolarActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_solar)
 
-        setSupportActionBar(toolbar)
-        supportActionBar?.let {
-            it.setDisplayHomeAsUpEnabled(true);
-            it.setDisplayShowHomeEnabled(true);
-            it.title = "Add Data"
+        ivBack.setOnClickListener {
+            finish()
         }
 
         btnSubmit.setOnClickListener {
             val solarData = SolarData()
-            solarData.date = etDate.text.toString()
+            solarData.date = inSdf.format(outSdf.parse(etDate.text.toString()))
             solarData.importdata = etImport.text.toString()
             solarData.export = etExport.text.toString()
 
@@ -71,13 +77,6 @@ class AddSolarActivity : AppCompatActivity() {
                 cal.get(Calendar.MONTH),
                 cal.get(Calendar.DAY_OF_MONTH)).show()
         }
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId){
-            android.R.id.home -> finish()
-        }
-        return super.onOptionsItemSelected(item)
     }
 
 }

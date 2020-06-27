@@ -7,4 +7,5 @@
     <color name="colorPrimaryLight">#CEB2E3</color>
 
     <color name="light_grey">#f5f5f5</color>
+    <color name="grey_text">#ababab</color>
 </resources>

@@ -53,10 +53,11 @@ class LoginFragment : Fragment(), View.OnClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        signInButton.setOnClickListener(this)
+        cardGoogle.setOnClickListener(this)
+        cardFacebook.setOnClickListener(this)
         fbLoginButton.setPermissions("email", "public_profile")
-        signOutButton.setOnClickListener(this)
-        disconnectButton.setOnClickListener(this)
+        cardSignOut.setOnClickListener(this)
+        //disconnectButton.setOnClickListener(this)
 
         when(userManager.status){
             UserManager.LoginStatus.GOOGLE_LOGIN ->
@@ -70,7 +71,7 @@ class LoginFragment : Fragment(), View.OnClickListener {
 
     override fun onClick(v: View) {
         when (v.id) {
-            R.id.signInButton -> {
+            R.id.cardGoogle -> {
                 loginViewModel = ViewModelProvider(requireActivity()).get(GoogleLoginViewModel::class.java)
 
                 loginViewModel?.apply {
@@ -79,6 +80,9 @@ class LoginFragment : Fragment(), View.OnClickListener {
                         startActivityForResult(signInIntent, GoogleLoginViewModel.RC_SIGN_IN)
                     }
                 }
+            }
+            R.id.cardFacebook -> {
+                fbLoginButton.performClick()
             }
             R.id.fbLoginButton -> {
                 loginViewModel = ViewModelProvider(requireActivity()).get(FacebookLoginViewModel::class.java)
@@ -116,18 +120,18 @@ class LoginFragment : Fragment(), View.OnClickListener {
                     })
                 }
             }
-            R.id.signOutButton -> {
+            R.id.cardSignOut -> {
                 loginViewModel?.signOut {
                     it.addOnCompleteListener(requireActivity()) {
                         updateLoginStatus(null)
                     }
                 }
             }
-            R.id.disconnectButton -> loginViewModel?.revokeAccess {
+            /*R.id.disconnectButton -> loginViewModel?.revokeAccess {
                 it.addOnCompleteListener(requireActivity()) {
                     updateLoginStatus(null)
                 }
-            }
+            }*/
         }
     }
 
@@ -150,12 +154,13 @@ class LoginFragment : Fragment(), View.OnClickListener {
 
     private fun updateUserUI(user: User?) {
         binding.viewModel = loginViewModel
-        if (user != null) {
-            binding.userName = user.name
+        binding.user = user
+
+        /*if (user != null) {
             Toast.makeText(requireContext(),"User: ${user.name}", Toast.LENGTH_LONG).show()
         } else {
             Toast.makeText(requireContext(),"User is signed out!", Toast.LENGTH_LONG).show()
-        }
+        }*/
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

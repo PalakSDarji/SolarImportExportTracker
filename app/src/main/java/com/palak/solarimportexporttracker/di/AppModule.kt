@@ -16,6 +16,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
+import java.text.SimpleDateFormat
 import javax.inject.Named
 import javax.inject.Qualifier
 import javax.inject.Singleton
@@ -51,6 +52,20 @@ class AppModule {
 
     @Singleton
     @Provides
+    @InSDF
+    fun provideInSdf() : SimpleDateFormat{
+        return SimpleDateFormat("dd/MM/yyyy")
+    }
+
+    @Singleton
+    @Provides
+    @OutSDF
+    fun provideOutSdf() : SimpleDateFormat{
+        return SimpleDateFormat("MMM dd, yyyy")
+    }
+
+    @Singleton
+    @Provides
     fun provideGsonBuilder() : GsonBuilder{
         return GsonBuilder()
     }
@@ -75,3 +90,11 @@ annotation class UsersRef
 @Qualifier
 @Retention(AnnotationRetention.BINARY)
 annotation class SolarDataRef
+
+@Qualifier
+@Retention(AnnotationRetention.BINARY)
+annotation class InSDF
+
+@Qualifier
+@Retention(AnnotationRetention.BINARY)
+annotation class OutSDF

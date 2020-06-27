@@ -9,10 +9,15 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavController
+import androidx.navigation.fragment.findNavController
 import com.palak.solarimportexporttracker.MyApplication
+import com.palak.solarimportexporttracker.R
 import com.palak.solarimportexporttracker.Utils.mutateIndexed
 
 import com.palak.solarimportexporttracker.databinding.FragmentSolarListBinding
+import com.palak.solarimportexporttracker.di.InSDF
+import com.palak.solarimportexporttracker.di.OutSDF
 import com.palak.solarimportexporttracker.home.login.UserManager
 import com.palak.solarimportexporttracker.home.solarList.model.DateHeader
 import dagger.hilt.android.AndroidEntryPoint
@@ -31,8 +36,18 @@ class SolarListFragment : Fragment() {
 
     private lateinit var adapter : SolarListAdapter
 
-    private val inSdf = SimpleDateFormat("dd/MM/yyyy")
-    private val outSdf = SimpleDateFormat("MMM dd, yyyy")
+    private lateinit var navController: NavController
+
+    @Inject
+    @InSDF
+    lateinit var inSdf : SimpleDateFormat
+
+    @Inject
+    @OutSDF
+    lateinit var outSdf : SimpleDateFormat
+
+    @Inject
+    lateinit var userManager: UserManager
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,9 +57,18 @@ class SolarListFragment : Fragment() {
         adapter = SolarListAdapter()
         binding.solarDataList.adapter = adapter
 
+        navController = findNavController()
         subscribeUi()
+        init()
 
         return binding.root
+    }
+
+    private fun init() {
+
+        binding.tvAdd.setOnClickListener {
+            navController.navigate(R.id.action_solarList_to_addSolarActivity)
+        }
     }
 
     private fun subscribeUi() {
@@ -65,6 +89,11 @@ class SolarListFragment : Fragment() {
                 modifiedListWithHeader.add(solarData)
             }
             adapter.submitList(modifiedListWithHeader)
+        })
+
+        userManager.currentUser.observe(viewLifecycleOwner, Observer {
+                user ->
+            if (user != null) binding.user = user
         })
     }
 }

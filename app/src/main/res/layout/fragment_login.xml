@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <import type="android.view.View" />
 
         <variable
@@ -12,8 +11,8 @@
             type="com.palak.solarimportexporttracker.home.login.LoginViewModel" />
 
         <variable
-            name="userName"
-            type="String" />
+            name="user"
+            type="com.palak.solarimportexporttracker.model.User" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -21,20 +20,132 @@
         android:layout_height="match_parent"
         tools:context=".home.login.LoginFragment">
 
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/imgProfile"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_margin="50dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/shape_bg_profile"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:profileImage="@{user.profileImage}"
+            app:riv_border_color="@color/colorPrimaryLight"
+            app:riv_border_width="2dp"
+            app:riv_oval="true" />
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
+            android:fontFamily="@font/calibrib"
             android:gravity="center"
-            android:text="@{`Welcome, ` + userName}"
-            android:textColor="@color/colorPrimary"
-            android:textSize="40sp"
+            android:includeFontPadding="false"
+            android:text="@{user.name}"
+            android:textColor="@android:color/black"
+            android:textSize="38sp"
             android:visibility="@{viewModel.userManager.userLoggedIn ? View.VISIBLE : View.GONE}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/imgProfile"
+            tools:text="Palak Darji" />
 
-        <com.google.android.gms.common.SignInButton
+        <TextView
+            android:id="@+id/tvLoginWith"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:fontFamily="@font/calibrib"
+            android:text="@string/login_to_sync_your_data_nand_never_worry_to_lost"
+            android:textColor="#8A8A8A"
+            android:textSize="18sp"
+            android:visibility="@{viewModel.userManager.userLoggedIn ? View.GONE : View.VISIBLE}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/imgProfile" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal"
+            android:visibility="@{viewModel.userManager.userLoggedIn ? View.GONE : View.VISIBLE}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvLoginWith">
+
+            <androidx.cardview.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/cardGoogle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                card_view:cardCornerRadius="15dp"
+                card_view:cardElevation="3dp"
+                card_view:cardUseCompatPadding="true">
+
+                <ImageView
+                    android:id="@+id/ivGoogle"
+                    android:layout_width="60dp"
+                    android:layout_height="50dp"
+                    android:background="@color/colorPrimaryDark"
+                    android:fontFamily="@font/calibrib"
+                    android:gravity="center"
+                    android:padding="14dp"
+                    android:src="@drawable/ic_google" />
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/cardFacebook"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                card_view:cardCornerRadius="15dp"
+                card_view:cardElevation="3dp"
+                card_view:cardUseCompatPadding="true">
+
+                <ImageView
+                    android:id="@+id/ivFacebook"
+                    android:layout_width="60dp"
+                    android:layout_height="50dp"
+                    android:background="@color/colorPrimaryDark"
+                    android:fontFamily="@font/calibrib"
+                    android:gravity="center"
+                    android:padding="14dp"
+                    android:src="@drawable/ic_fb" />
+
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+
+        <androidx.cardview.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/cardSignOut"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:visibility="@{viewModel.userManager.userLoggedIn ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            card_view:cardCornerRadius="10dp"
+            card_view:cardElevation="3dp"
+            card_view:cardUseCompatPadding="true">
+
+            <TextView
+                android:id="@+id/btnSignOut"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimaryDark"
+                android:fontFamily="@font/calibrib"
+                android:gravity="center"
+                android:padding="12dp"
+                android:text="@string/log_out"
+                android:textColor="@android:color/white"
+                android:textSize="20sp" />
+
+        </androidx.cardview.widget.CardView>
+
+        <!--<com.google.android.gms.common.SignInButton
             android:id="@+id/signInButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -43,7 +154,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
+-->
         <com.facebook.login.widget.LoginButton
             android:id="@+id/fbLoginButton"
             android:layout_width="wrap_content"
@@ -51,30 +162,30 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="30dp"
             android:layout_marginBottom="30dp"
-            android:visibility="@{viewModel.userManager.userLoggedIn ? View.GONE : View.VISIBLE}"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/signInButton" />
-
+            app:layout_constraintTop_toBottomOf="@+id/cardSignOut" />
+<!--
         <Button
             android:id="@+id/signOutButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Sign Out"
-            android:visibility="@{viewModel.userManager.userLoggedIn ? View.VISIBLE : View.GONE}"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent" />-->
 
-        <Button
+        <!--<Button
             android:id="@+id/disconnectButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Revoke Access"
-            android:visibility="@{viewModel.userManager.userLoggedIn ? View.VISIBLE : View.GONE}"
+            android:visibility="gone"
             app:layout_constraintBottom_toTopOf="@+id/signOutButton"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent" />-->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

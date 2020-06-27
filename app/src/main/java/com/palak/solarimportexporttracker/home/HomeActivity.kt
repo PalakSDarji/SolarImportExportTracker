@@ -10,8 +10,12 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.NavController
+import androidx.navigation.NavDestination
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
+import androidx.navigation.ui.NavigationUI.onNavDestinationSelected
+import androidx.navigation.ui.setupWithNavController
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.iid.FirebaseInstanceId
 import com.palak.solarimportexporttracker.MyApplication
@@ -43,8 +47,16 @@ class HomeActivity : AppCompatActivity() {
 
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment?
         NavigationUI.setupWithNavController(binding.bottomNavView, navHostFragment?.navController!!)
+        binding.bottomNavView.setOnNavigationItemSelectedListener {
+            item ->
+            onNavDestinationSelected(item,navHostFragment.navController)
+        }
 
-        //setSupportActionBar(binding.toolbar)
+        navHostFragment.navController.addOnDestinationChangedListener {
+                controller, destination, arguments ->
+
+        }
+
         setupNotification()
     }
 

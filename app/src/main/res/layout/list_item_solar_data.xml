@@ -82,7 +82,7 @@
                     android:id="@+id/tvExportTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/ic_baseline_arrow_back_24"
+                    android:drawableLeft="@drawable/ic_baseline_arrow_back_white"
                     android:fontFamily="@font/calibri"
                     android:gravity="center"
                     android:includeFontPadding="false"

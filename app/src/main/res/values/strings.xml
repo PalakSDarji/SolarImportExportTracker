@@ -29,4 +29,12 @@
     <string name="header">Track daily Import/Export\nof your Solar Cell</string>
     <string name="tvImport">Import</string>
     <string name="tvExport">Export</string>
+    <string name="add_data">Add Data</string>
+    <string name="import_title">Import</string>
+    <string name="units">Units</string>
+    <string name="submit">Submit</string>
+    <string name="export">Export</string>
+    <string name="date">Date</string>
+    <string name="log_out">Log out</string>
+    <string name="login_to_sync_your_data_nand_never_worry_to_lost">Login to save and sync your data,\n&amp; never worry to lost it ever!</string>
 </resources>

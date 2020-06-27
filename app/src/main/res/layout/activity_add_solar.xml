@@ -7,59 +7,187 @@
     android:orientation="vertical"
     tools:context=".addData.AddSolarActivity">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
+    <ImageView
+        android:id="@+id/ivBackground"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:alpha="1"
+        android:src="@drawable/halfsun"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/ivBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="24dp"
+        android:src="@drawable/ic_baseline_arrow_back_24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvHeader"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
-        android:minHeight="?attr/actionBarSize"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="24dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="24dp"
+        android:fontFamily="@font/calibrib"
+        android:text="@string/add_data"
+        android:textColor="#000000"
+        android:textSize="32sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:theme="@style/ToolbarTheme"
-        app:titleTextColor="@android:color/white" />
+        app:layout_constraintTop_toBottomOf="@id/ivBack" />
 
-    <androidx.appcompat.widget.AppCompatTextView
+    <TextView
+        android:id="@+id/tvDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/calibrib"
+        android:text="@string/date"
+        android:textColor="@color/colorPrimary"
+        android:textSize="17sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvHeader" />
+
+    <EditText
         android:id="@+id/etDate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="15dp"
-        android:hint="Enter date"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="20dp"
+        android:fontFamily="@font/calibrib"
+        android:imeOptions="actionNext"
+        android:clickable="true"
+        android:editable="false"
+        android:focusable="false"
+        android:includeFontPadding="false"
         android:inputType="date"
-        android:textSize="20sp"
+        android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar" />
+        app:layout_constraintTop_toBottomOf="@id/tvDate"
+        tools:text="October 3, 2020" />
 
-    <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/etImport"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/tvImport"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:hint="Enter Import"
-        android:inputType="number"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="25dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/calibrib"
+        android:text="@string/import_title"
+        android:textColor="@color/colorPrimary"
+        android:textSize="17sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/etDate" />
 
-    <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/etExport"
+    <EditText
+        android:id="@+id/etImport"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:hint="Enter Export"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="20dp"
+        android:fontFamily="@font/calibrib"
+        android:imeOptions="actionNext"
+        android:includeFontPadding="false"
         android:inputType="number"
+        android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvImport"
+        tools:text="230" />
+
+    <TextView
+        android:id="@+id/tvImportUnits"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="25dp"
+        android:layout_marginRight="25dp"
+        android:fontFamily="@font/calibrib"
+        android:text="@string/units"
+        android:textColor="@color/grey_text"
+        android:textSize="17sp"
+        app:layout_constraintBaseline_toBaselineOf="@id/etImport"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/tvExport"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/calibrib"
+        android:text="@string/export"
+        android:textColor="@color/colorPrimary"
+        android:textSize="17sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/etImport" />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnSubmit"
+    <EditText
+        android:id="@+id/etExport"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Submit"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="20dp"
+        android:fontFamily="@font/calibrib"
+        android:imeOptions="actionDone"
+        android:includeFontPadding="false"
+        android:inputType="number"
+        android:textSize="25sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvExport"
+        tools:text="240" />
+
+    <TextView
+        android:id="@+id/tvExportUnits"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="25dp"
+        android:layout_marginRight="25dp"
+        android:fontFamily="@font/calibrib"
+        android:text="@string/units"
+        android:textColor="@color/grey_text"
+        android:textSize="17sp"
+        app:layout_constraintBaseline_toBaselineOf="@id/etExport"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <androidx.cardview.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        card_view:cardCornerRadius="10dp"
+        card_view:cardElevation="3dp"
+        card_view:cardUseCompatPadding="true">
 
-        app:layout_constraintStart_toStartOf="parent" />
+        <TextView
+            android:id="@+id/btnSubmit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimaryDark"
+            android:fontFamily="@font/calibrib"
+            android:gravity="center"
+            android:padding="15dp"
+            android:text="@string/submit"
+            android:textColor="@android:color/white"
+            android:textSize="23sp" />
+
+    </androidx.cardview.widget.CardView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

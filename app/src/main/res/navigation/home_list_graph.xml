@@ -9,9 +9,18 @@
         android:id="@+id/solarList"
         android:name="com.palak.solarimportexporttracker.home.solarList.SolarListFragment"
         android:label="fragment_solar_list"
-        tools:layout="@layout/fragment_solar_list" />
+        tools:layout="@layout/fragment_solar_list" >
+        <action
+            android:id="@+id/action_solarList_to_addSolarActivity"
+            app:destination="@id/addSolarActivity" />
+    </fragment>
 
     <include app:graph="@navigation/auth_graph" />
+    <activity
+        android:id="@+id/addSolarActivity"
+        android:name="com.palak.solarimportexporttracker.addData.AddSolarActivity"
+        android:label="activity_add_solar"
+        tools:layout="@layout/activity_add_solar" />
 
 
 </navigation>

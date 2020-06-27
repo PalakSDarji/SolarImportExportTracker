@@ -39,7 +39,7 @@ abstract class LoginViewModel(application: Application,
     fun syncUserToFirebaseDatabase(firebaseUser : FirebaseUser?){
         if(firebaseUser != null) {
             firebaseUser.apply {
-                val userObject = User(uid,displayName,email,providerId)
+                val userObject = User(uid,displayName,email,providerId,photoUrl?.toString())
                 usersDataRef.child(uid).setValue(userObject)
                 userManager.updateCurrentUser(userObject)
 
