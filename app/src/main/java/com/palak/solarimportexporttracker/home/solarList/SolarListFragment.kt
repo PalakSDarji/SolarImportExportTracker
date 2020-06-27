@@ -66,7 +66,7 @@ class SolarListFragment : Fragment() {
 
     private fun init() {
 
-        binding.tvAdd.setOnClickListener {
+        binding.llAdd.setOnClickListener {
             navController.navigate(R.id.action_solarList_to_addSolarActivity)
         }
     }

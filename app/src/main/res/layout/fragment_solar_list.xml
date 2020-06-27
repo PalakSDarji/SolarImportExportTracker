@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".home.solarList.SolarListFragment">
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -15,151 +14,172 @@
             type="boolean" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@android:color/white">
+        android:background="@android:color/white"
+        tools:context=".home.solarList.SolarListFragment">
 
-        <com.makeramen.roundedimageview.RoundedImageView
-            android:id="@+id/imgProfile"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_margin="24dp"
-            android:scaleType="fitCenter"
-            android:src="@drawable/shape_bg_profile"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:profileImage="@{user.profileImage}"
-            app:riv_border_color="@color/colorPrimaryLight"
-            app:riv_border_width="2dp"
-            app:riv_oval="true" />
-
-        <LinearLayout
-            android:id="@+id/llAdd"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:paddingStart="20dp"
-            android:paddingLeft="20dp"
-            android:paddingTop="24dp"
-            android:paddingBottom="4dp"
-            app:layout_constraintBottom_toBottomOf="@+id/imgProfile"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="5dp"
-                android:layout_marginRight="5dp"
-                android:src="@drawable/ic_add_circle_outline_black_24dp" />
-
-            <TextView
-                android:id="@+id/tvAdd"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="24dp"
-                android:layout_marginRight="24dp"
-                android:fontFamily="@font/calibrib"
-                android:text="@string/str_add"
-                android:textColor="@color/colorPrimary"
-                android:textSize="17sp" />
-
-        </LinearLayout>
-
-
-        <androidx.core.widget.NestedScrollView
-            android:id="@+id/nestedScroll"
-            isGone="@{!hasData}"
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appbar"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="14dp"
-            android:layout_marginEnd="24dp"
-            android:overScrollMode="never"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imgProfile">
+            android:layout_height="wrap_content"
+            android:paddingBottom="20dp"
+            android:background="@android:color/white"
+            app:liftOnScroll="true">
+
+            <androidx.appcompat.widget.Toolbar
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:elevation="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.makeramen.roundedimageview.RoundedImageView
+                        android:id="@+id/imgProfile"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="24dp"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/shape_bg_profile"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:profileImage="@{user.profileImage}"
+                        app:riv_border_color="@color/colorPrimaryLight"
+                        app:riv_border_width="2dp"
+                        app:riv_oval="true" />
+
+                    <LinearLayout
+                        android:id="@+id/llAdd"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingStart="20dp"
+                        android:paddingLeft="20dp"
+                        android:paddingTop="24dp"
+                        android:paddingBottom="4dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/imgProfile"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="5dp"
+                            android:layout_marginRight="5dp"
+                            android:src="@drawable/ic_add_circle_outline_black_24dp" />
+
+                        <TextView
+                            android:id="@+id/tvAdd"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="24dp"
+                            android:layout_marginRight="24dp"
+                            android:fontFamily="@font/calibrib"
+                            android:text="@string/str_add"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="17sp" />
+
+                    </LinearLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.appcompat.widget.Toolbar>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/appbar"
+            android:background="@android:color/white"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <androidx.core.widget.NestedScrollView
+                android:id="@+id/nestedScroll"
+                isGone="@{!hasData}"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="14dp"
+                android:layout_marginEnd="24dp"
+                android:overScrollMode="never"
+                app:layout_constraintBottom_toBottomOf="parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvHi"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:fontFamily="@font/calibrib"
+                        android:text="@string/hi_welcome"
+                        android:textColor="#8A8A8A"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:id="@+id/tvHeader"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:fontFamily="@font/calibrib"
+                        android:text="@string/header"
+                        android:textColor="#000000"
+                        android:textSize="32sp" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/solarDataList"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="10dp"
+                        android:clipToPadding="false"
+                        android:overScrollMode="never"
+                        android:paddingBottom="20dp"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        tools:listitem="@layout/list_item_solar_data" />
+
+                </LinearLayout>
+            </androidx.core.widget.NestedScrollView>
 
             <LinearLayout
+                android:id="@+id/llEmptySolar"
+                isGone="@{hasData}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-                <TextView
-                    android:id="@+id/tvHi"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:fontFamily="@font/calibrib"
-                    android:text="@string/hi_welcome"
-                    android:textColor="#8A8A8A"
-                    android:textSize="18sp" />
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/fullsun" />
 
-                <TextView
-                    android:id="@+id/tvHeader"
+                <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:fontFamily="@font/calibrib"
-                    android:text="@string/header"
-                    android:textColor="#000000"
-                    android:textSize="32sp" />
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/solarDataList"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
                     android:layout_marginTop="10dp"
-                    android:clipToPadding="false"
-                    android:overScrollMode="never"
-                    android:paddingBottom="20dp"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    tools:listitem="@layout/list_item_solar_data" />
+                    android:fontFamily="@font/calibri"
+                    android:gravity="center"
+                    android:text="Add some data,\nthen you will see!"
+                    android:textColor="@color/colorPrimaryLight"
+                    android:textSize="25sp" />
 
             </LinearLayout>
-        </androidx.core.widget.NestedScrollView>
 
-        <!--
-
-                <View
-                    android:background="@drawable/view_fadder_bg"
-                    android:id="@+id/viewFadder"
-                    android:layout_width="match_parent"
-                    android:layout_height="25dp"
-                    android:layout_marginTop="14dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/imgProfile" />
-        -->
-
-        <LinearLayout
-            android:id="@+id/llEmptySolar"
-            isGone="@{hasData}"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <ImageView
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_gravity="center"
-                android:src="@drawable/fullsun" />
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:fontFamily="@font/calibri"
-                android:gravity="center"
-                android:text="Add some data,\nthen you will see!"
-                android:textColor="@color/colorPrimaryLight"
-                android:textSize="25sp" />
-
-        </LinearLayout>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>
