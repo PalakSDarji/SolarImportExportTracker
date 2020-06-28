@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_solarList_to_addSolarActivity"
             app:destination="@id/addSolarActivity" />
+        <action
+            android:id="@+id/action_solarList_to_syncList"
+            app:destination="@id/syncList" />
     </fragment>
 
     <include app:graph="@navigation/auth_graph" />

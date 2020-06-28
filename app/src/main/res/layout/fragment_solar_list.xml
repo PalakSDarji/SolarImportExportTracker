@@ -163,8 +163,8 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
                     android:layout_gravity="center"
                     android:src="@drawable/fullsun" />
 
@@ -172,11 +172,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:fontFamily="@font/calibri"
+                    android:fontFamily="@font/calibrib"
                     android:gravity="center"
                     android:text="@string/add_some_data_nthen_you_will_see"
                     android:textColor="@color/little_light_grey_sub_text"
-                    android:textSize="25sp" />
+                    android:textSize="18sp" />
 
             </LinearLayout>
 
