@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="clickListener"
             type="android.view.View.OnClickListener" />
@@ -27,12 +28,12 @@
             android:layout_marginTop="4dp"
             android:background="#D8D8D8" />
 
-        <androidx.cardview.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            card_view:cardCornerRadius="10dp"
-            card_view:cardElevation="3dp"
-            card_view:cardUseCompatPadding="true">
+            app:cardCornerRadius="10dp"
+            app:cardElevation="3dp"
+            app:cardUseCompatPadding="true">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -48,10 +49,10 @@
                     android:includeFontPadding="false"
                     android:text="@{solarData.importdata}"
                     android:textColor="#ffffff"
-                    tools:text="223"
                     android:textSize="45sp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="223" />
 
                 <TextView
                     android:id="@+id/tvImportTitle"
@@ -76,9 +77,9 @@
                     android:text="@{solarData.export}"
                     android:textColor="#ffffff"
                     android:textSize="45sp"
-                    tools:text="243"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="243" />
 
                 <TextView
                     android:id="@+id/tvExportTitle"
@@ -101,9 +102,13 @@
                     android:layout_marginTop="25dp"
                     android:fontFamily="@font/robotoitalic"
                     android:includeFontPadding="false"
+                    android:singleLine="false"
                     android:textColor="#ffffff"
                     android:textSize="15sp"
+                    app:layout_constrainedWidth="true"
+                    app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/tvTime"
                     app:layout_constraintTop_toBottomOf="@+id/tvImportTitle"
                     tools:text="Your usage is 18 Unit lower." />
 
