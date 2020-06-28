@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.palak.solarimportexporttracker.MyApplication
 import com.palak.solarimportexporttracker.R
 import com.palak.solarimportexporttracker.Utils.hideKeyboard
+import com.palak.solarimportexporttracker.Utils.snack
 import com.palak.solarimportexporttracker.di.InSDF
 import com.palak.solarimportexporttracker.di.OutSDF
 import com.palak.solarimportexporttracker.model.SolarData
@@ -70,6 +71,11 @@ class AddSolarActivity : AppCompatActivity() {
         }
 
         btnSubmit.setOnClickListener {
+
+            if(!isDataValid()) {
+                return@setOnClickListener
+            }
+
             val solarData = SolarData()
             //solarData.date = inSdf.format(outSdf.parse(etDate.text.toString()))
             solarData.date = inSdf.format(cal.time)
@@ -91,6 +97,24 @@ class AddSolarActivity : AppCompatActivity() {
                 cal.get(Calendar.MONTH),
                 cal.get(Calendar.DAY_OF_MONTH)).show()
         }
+    }
+
+    private fun isDataValid(): Boolean {
+
+        if(etDate.text.toString().isEmpty()){
+            root.snack("Please enter the Date")
+            return false
+        }
+        if(etImport.text.toString().isEmpty()) {
+            root.snack("Please enter Import data")
+            return false
+        }
+        if(etExport.text.toString().isEmpty()) {
+            root.snack("Please enter Export data")
+            return false
+        }
+
+        return true
     }
 
 }

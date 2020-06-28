@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.NavOptions
 import androidx.navigation.ui.NavigationUI
+import com.google.android.material.snackbar.Snackbar
 import com.palak.solarimportexporttracker.R
 
 fun Fragment.hideKeyboard() {
@@ -37,4 +38,8 @@ inline fun <T> MutableList<T>.mutateIndexed(transform: (Int, T) -> T): MutableLi
         iterator.set(transform(i++, iterator.next()))
     }
     return this
+}
+
+fun View.snack(message: String, duration: Int = Snackbar.LENGTH_LONG) {
+    Snackbar.make(this, message, duration).show()
 }
