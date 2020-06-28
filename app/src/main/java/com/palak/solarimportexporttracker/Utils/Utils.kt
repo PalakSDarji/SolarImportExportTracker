@@ -15,7 +15,7 @@ class Utils {
         fun loadImage(view: ImageView, imageUrl: String?) {
             if(imageUrl == null){
                 view.setImageResource(android.R.color.transparent)
-                view.setImageResource(R.drawable.empty_placeholder)
+                view.setImageResource(R.drawable.shape_bg_profile)
                 return
             }
             Glide.with(view.context)

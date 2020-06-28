@@ -48,11 +48,11 @@
                         android:layout_marginLeft="10dp"
                         android:layout_marginTop="24dp"
                         android:scaleType="fitCenter"
-                        android:src="@drawable/empty_placeholder"
+                        android:src="@drawable/shape_bg_profile"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:profileImage="@{user.profileImage}"
-                        app:riv_border_color="@color/colorPrimaryLight"
+                        app:riv_border_color="@color/colorAccent"
                         app:riv_border_width="2dp"
                         app:riv_oval="true" />
 
@@ -105,7 +105,7 @@
                 android:id="@+id/nestedScroll"
                 isGone="@{!hasData}"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
+                android:layout_height="match_parent"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="14dp"
                 android:layout_marginEnd="24dp"

@@ -71,6 +71,8 @@ class SolarListFragment : Fragment() {
 
     private fun init() {
 
+        binding.solarDataList.isNestedScrollingEnabled = false
+
         binding.llAdd.setOnClickListener {
             navController.navigate(R.id.action_solarList_to_addSolarActivity)
         }
