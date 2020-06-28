@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <import type="android.view.View" />
 
         <variable
@@ -17,8 +18,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:background="@android:color/white"
         android:layout_height="match_parent"
+        android:background="@android:color/white"
         tools:context=".home.login.LoginFragment">
 
         <com.makeramen.roundedimageview.RoundedImageView
@@ -27,7 +28,7 @@
             android:layout_height="100dp"
             android:layout_margin="50dp"
             android:scaleType="fitCenter"
-            android:src="@drawable/shape_bg_profile"
+            android:src="@drawable/empty_placeholder"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -58,10 +59,10 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:fontFamily="@font/calibrib"
-            android:text="@string/login_to_sync_your_data_nand_never_worry_to_lost"
-            android:textColor="#8A8A8A"
-            android:textSize="18sp"
             android:gravity="center"
+            android:text="@string/login_to_sync_your_data_nand_never_worry_to_lost"
+            android:textColor="@color/little_light_grey_sub_text"
+            android:textSize="18sp"
             android:visibility="@{viewModel.userManager.userLoggedIn ? View.GONE : View.VISIBLE}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -70,8 +71,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
             android:layout_marginTop="10dp"
+            android:gravity="center"
             android:orientation="horizontal"
             android:visibility="@{viewModel.userManager.userLoggedIn ? View.GONE : View.VISIBLE}"
             app:layout_constraintEnd_toEndOf="parent"
@@ -82,18 +83,21 @@
                 android:id="@+id/cardGoogle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                card_view:cardCornerRadius="15dp"
-                card_view:cardElevation="3dp"
+                card_view:cardCornerRadius="35dp"
+                card_view:cardElevation="6dp"
                 card_view:cardUseCompatPadding="true">
 
                 <ImageView
                     android:id="@+id/ivGoogle"
-                    android:layout_width="60dp"
+                    android:layout_width="70dp"
                     android:layout_height="50dp"
-                    android:background="@color/colorPrimaryDark"
+                    android:background="@color/google"
                     android:fontFamily="@font/calibrib"
                     android:gravity="center"
-                    android:padding="14dp"
+                    android:paddingLeft="17dp"
+                    android:paddingTop="15dp"
+                    android:paddingRight="17dp"
+                    android:paddingBottom="15dp"
                     android:src="@drawable/ic_google" />
 
             </androidx.cardview.widget.CardView>
@@ -102,18 +106,22 @@
                 android:id="@+id/cardFacebook"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                card_view:cardCornerRadius="15dp"
-                card_view:cardElevation="3dp"
+                card_view:cardCornerRadius="35dp"
+                card_view:cardElevation="6dp"
                 card_view:cardUseCompatPadding="true">
 
                 <ImageView
                     android:id="@+id/ivFacebook"
-                    android:layout_width="60dp"
+                    android:layout_width="70dp"
                     android:layout_height="50dp"
-                    android:background="@color/colorPrimaryDark"
+                    android:background="@color/fb"
                     android:fontFamily="@font/calibrib"
                     android:gravity="center"
                     android:padding="14dp"
+                    android:paddingLeft="17dp"
+                    android:paddingTop="15dp"
+                    android:paddingRight="17dp"
+                    android:paddingBottom="15dp"
                     android:src="@drawable/ic_fb" />
 
             </androidx.cardview.widget.CardView>
@@ -168,16 +176,16 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cardSignOut" />
-<!--
-        <Button
-            android:id="@+id/signOutButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Sign Out"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />-->
+        <!--
+                <Button
+                    android:id="@+id/signOutButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Sign Out"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />-->
 
         <!--<Button
             android:id="@+id/disconnectButton"

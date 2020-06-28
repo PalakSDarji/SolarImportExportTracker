@@ -48,6 +48,7 @@
                     android:includeFontPadding="false"
                     android:text="@{solarData.importdata}"
                     android:textColor="#ffffff"
+                    tools:text="223"
                     android:textSize="45sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -75,6 +76,7 @@
                     android:text="@{solarData.export}"
                     android:textColor="#ffffff"
                     android:textSize="45sp"
+                    tools:text="243"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
