@@ -1,6 +1,7 @@
 package com.palak.solarimportexporttracker.addData
 
 import android.app.DatePickerDialog
+import android.app.TimePickerDialog
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.activity.viewModels
@@ -38,10 +39,23 @@ class AddSolarActivity : AppCompatActivity() {
             cal.set(Calendar.MONTH, monthOfYear)
             cal.set(Calendar.DAY_OF_MONTH, dayOfMonth)
             addDateToView()
+
+            TimePickerDialog(this,timeSetListener,cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE),false).show()
         }
+
+    val timeSetListener = TimePickerDialog.OnTimeSetListener { view, hourOfDay, minute ->
+        cal.set(Calendar.HOUR_OF_DAY, hourOfDay)
+        cal.set(Calendar.MINUTE, minute)
+        addTimeAndDateToView()
+    }
 
     private fun addDateToView() {
         etDate.setText(outSdf.format(cal.time))
+    }
+
+    private fun addTimeAndDateToView() {
+        addDateToView()
+        etDate.setText(inSdf.format(cal.time))
     }
 
     private val solarListViewModel : SolarListViewModel by viewModels()
@@ -57,7 +71,8 @@ class AddSolarActivity : AppCompatActivity() {
 
         btnSubmit.setOnClickListener {
             val solarData = SolarData()
-            solarData.date = inSdf.format(outSdf.parse(etDate.text.toString()))
+            //solarData.date = inSdf.format(outSdf.parse(etDate.text.toString()))
+            solarData.date = inSdf.format(cal.time)
             solarData.importdata = etImport.text.toString()
             solarData.export = etExport.text.toString()
 
@@ -67,7 +82,6 @@ class AddSolarActivity : AppCompatActivity() {
                     finish()
                 }
             })
-
         }
 
         etDate.setOnClickListener {
