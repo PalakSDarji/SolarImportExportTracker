@@ -7,15 +7,22 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "solar_data")
 data class SolarData(
 
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey
     @ColumnInfo(name = "id")
-    var id : Int = 0,
+    var id: String = "",
 
     @ColumnInfo(name = "date")
-    var date : String = "",
+    var date: String = "",
 
     @ColumnInfo(name = "importdata")
     var importdata: String = "",
 
     @ColumnInfo(name = "export")
-    var export: String = "")
+    var export: String = "",
+
+    @ColumnInfo(name = "assignedToSync")
+    var assignedToSync: Boolean = false,
+
+    @ColumnInfo(name = "synced")
+    var synced: Boolean = false
+)

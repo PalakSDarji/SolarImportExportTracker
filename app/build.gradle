@@ -112,9 +112,13 @@ dependencies {
     kapt "com.google.dagger:hilt-android-compiler:2.28-alpha"
     implementation "androidx.hilt:hilt-lifecycle-viewmodel:$rootProject.hilt_jetpack_version"
     kapt "androidx.hilt:hilt-compiler:$rootProject.hilt_jetpack_version"
+    implementation 'androidx.hilt:hilt-work:1.0.0-alpha01'
+    kapt 'androidx.hilt:hilt-compiler:1.0.0-alpha01'
 
     implementation 'com.makeramen:roundedimageview:2.3.0'
 
     implementation 'com.github.bumptech.glide:glide:4.11.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
+
+    implementation "androidx.work:work-runtime-ktx:$workmanager_version"
 }

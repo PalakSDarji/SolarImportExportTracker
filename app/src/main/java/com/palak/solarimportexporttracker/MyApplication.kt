@@ -6,15 +6,21 @@ import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import android.util.Base64
 import android.util.Log
+import androidx.hilt.work.HiltWorkerFactory
 import androidx.multidex.MultiDexApplication
+import androidx.work.Configuration
 import com.facebook.FacebookSdk
 import com.facebook.appevents.AppEventsLogger
 import dagger.hilt.android.HiltAndroidApp
 import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
+import javax.inject.Inject
 
 @HiltAndroidApp
-class MyApplication : MultiDexApplication() {
+class MyApplication : MultiDexApplication(), Configuration.Provider {
+
+    @Inject
+    lateinit var workerFactory : HiltWorkerFactory
 
     override fun onCreate() {
         super.onCreate()
@@ -40,4 +46,7 @@ class MyApplication : MultiDexApplication() {
             Log.e("printHashKey()", "printHashKey()", e)
         }
     }
+
+    override fun getWorkManagerConfiguration() =
+        Configuration.Builder().setWorkerFactory(workerFactory).build()
 }

@@ -83,10 +83,9 @@ class SolarListFragment : Fragment() {
     }
 
     private fun subscribeUi() {
+        println("SolarDataList obj in solar: ${solarListViewModel.solarDataList}")
         solarListViewModel.solarDataList.observe(viewLifecycleOwner, Observer {
                 solarDataList ->
-
-            println("SolarDataList: $solarDataList")
             binding.hasData = !solarDataList.isNullOrEmpty()
 
             val modifiedListWithHeader = mutableListOf<Any>()

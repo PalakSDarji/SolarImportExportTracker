@@ -3,11 +3,10 @@ package com.palak.solarimportexporttracker.addData
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.os.Bundle
-import android.view.MenuItem
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
-import com.palak.solarimportexporttracker.MyApplication
+import androidx.lifecycle.Observer
+import androidx.lifecycle.observe
 import com.palak.solarimportexporttracker.R
 import com.palak.solarimportexporttracker.Utils.hideKeyboard
 import com.palak.solarimportexporttracker.Utils.snack
@@ -60,6 +59,7 @@ class AddSolarActivity : AppCompatActivity() {
     }
 
     private val solarListViewModel : SolarListViewModel by viewModels()
+    private val addSolarViewModel : AddSolarViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -78,11 +78,13 @@ class AddSolarActivity : AppCompatActivity() {
 
             val solarData = SolarData()
             //solarData.date = inSdf.format(outSdf.parse(etDate.text.toString()))
+            solarData.id = UUID.randomUUID().toString()
             solarData.date = inSdf.format(cal.time)
             solarData.importdata = etImport.text.toString()
             solarData.export = etExport.text.toString()
+            solarData.synced = false
 
-            solarListViewModel.insertSolarData(solarData).observe(this, androidx.lifecycle.Observer { id ->
+            addSolarViewModel.insertSolarData(solarData).observe(this, Observer { id ->
                 if(id>0){
                     hideKeyboard()
                     finish()
