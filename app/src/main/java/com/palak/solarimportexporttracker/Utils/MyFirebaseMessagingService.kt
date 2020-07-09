@@ -16,6 +16,7 @@ import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import com.palak.solarimportexporttracker.R
 import com.palak.solarimportexporttracker.home.HomeActivity
+import java.security.MessageDigest
 
 class MyFirebaseMessagingService : FirebaseMessagingService() {
 
@@ -141,6 +142,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         }
 
         notificationManager.notify(0 /* ID of notification */, notificationBuilder.build())
+
     }
 
     companion object {

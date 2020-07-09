@@ -25,6 +25,9 @@ import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.iid.FirebaseInstanceId
 import com.palak.solarimportexporttracker.MyApplication
 import com.palak.solarimportexporttracker.R
+import com.palak.solarimportexporttracker.Utils.CryptographyUtils
+import com.palak.solarimportexporttracker.Utils.MD5Utils
+import com.palak.solarimportexporttracker.Utils.SecurityUtils
 import com.palak.solarimportexporttracker.addData.AddSolarActivity
 import com.palak.solarimportexporttracker.databinding.ActivityHomeBinding
 import com.palak.solarimportexporttracker.home.login.UserManager
@@ -54,6 +57,13 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this,R.layout.activity_home)
         init()
+
+        val c = CryptographyUtils(this)
+        val en = c.encryptData("Palak")
+        println("ENcr : $en")
+        val de = c.decryptData(en)
+        println("Dcr : $de")
+
     }
 
     private fun init() {

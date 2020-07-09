@@ -8,6 +8,14 @@ apply plugin: 'dagger.hilt.android.plugin'
 
 
 android {
+    signingConfigs {
+        release {
+            storeFile file('D:\\AndroidDev\\Projects\\SolarImportExportTracker\\jks\\ks.jks')
+            storePassword 'sjdbASSDjuh@s234'
+            keyAlias 'Palak'
+            keyPassword 'sjdbASSDjuh@s234'
+        }
+    }
     compileSdkVersion 29
     buildToolsVersion "29.0.3"
     buildFeatures {
@@ -28,19 +36,21 @@ android {
 
     defaultConfig {
         applicationId "com.palak.solarimportexporttracker"
-        minSdkVersion 16
+        minSdkVersion 18
         targetSdkVersion 29
-        versionCode 1
-        versionName "1.0"
+        versionCode 2
+        versionName "1.1"
         multiDexEnabled true
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        signingConfig signingConfigs.release
     }
 
 
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }

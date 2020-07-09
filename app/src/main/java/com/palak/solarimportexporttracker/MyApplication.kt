@@ -39,6 +39,7 @@ class MyApplication : MultiDexApplication(), Configuration.Provider {
                 md.update(signature.toByteArray())
                 val hashKey = String(Base64.encode(md.digest(), 0))
                 Log.i("printHashKey()", "printHashKey() Hash Key: $hashKey")
+
             }
         } catch (e: NoSuchAlgorithmException) {
             Log.e("printHashKey()", "printHashKey()", e)
