@@ -15,6 +15,18 @@ executors:
     resource_class: small
 
 aliases:
+  - &create_keystore
+    run:
+      name: Create ks.jks
+      command: echo $RELEASE_KEYSTORE_BASE64 | base64 -d > $releaseKeyStore
+  - &create_keystore_properties
+    run:
+      name: Create keystore.properies
+      command: printf 'releaseKeyAlias=%s\nreleaseKeyPassword=%s\nreleaseKeyStore=%s\nreleaseStorePassword=%s' $releaseKeyAlias $releaseKeyPassword $releaseKeyStore $releaseStorePassword > keystore.properties
+  - &perm
+    - run:
+        name: Chmod permissions #if permission for Gradlew Dependencies fail, use this.
+        command: sudo chmod +x ./gradlew
   - &assemble
     run:
       name: Assemble Project
@@ -46,6 +58,9 @@ jobs:
     executor: android-executor
     steps:
       - checkout
+      - *create_keystore
+      - *create_keystore_properties
+      - *perm
       - *assemble
       - *unit_tests
 
@@ -58,6 +73,9 @@ jobs:
     executor: android-executor
     steps:
       - checkout
+      - *create_keystore
+      - *create_keystore_properties
+      - *perm
       - *assemble
       - *deploy_apk
 
