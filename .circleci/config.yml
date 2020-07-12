@@ -1,37 +1,85 @@
-version: 2
-jobs:
-  build:
-    working_directory: ~/code
+version: 2.1
+
+executors:
+  android-executor:
     docker:
-      - image: circleci/android:api-28
+      - image: circleci/android:api-29
     environment:
-      JVM_OPTS: -Xmx3200m
+      - JAVA_OPTIONS: "-Xmx3072m -XX:+HeapDumpOnOutOfMemoryError"
+
+  general-executor:
+    docker:
+      - environment:
+          TERM: dumb
+        image: 'cibuilds/base:latest'
+    resource_class: small
+
+aliases:
+  - &assemble
+    run:
+      name: Assemble Project
+      command: ./gradlew assembleRelease
+  - &unit_tests
+    run:
+      name: Run Unit Tests
+      command: ./gradlew :app:testReleaseUnitTest
+  #  Placeholder deployment task
+  - &deploy_apk
+    run:
+      name: Deploy Release Artifact
+      command: echo "Deploy release for distribution"
+
+slack-aliases:
+  - &slack_channel_webhook
+      ${CIRCLE_SLACK_WEBHOOK}
+  - &notify_slack_for_approval
+    slack/notify:
+      color: '#400080'
+      message: |
+        [${CIRCLE_USERNAME}] Please check and approve Jobs to manually deploy the releases.
+        https://circleci.com/workflow-run/${CIRCLE_WORKFLOW_ID}
+      webhook: *slack_channel_webhook
+
+jobs:
+
+  build:
+    executor: android-executor
     steps:
       - checkout
-      - run:
-          name: Create ks.jks
-          command: echo $RELEASE_KEYSTORE_BASE64 | base64 -d > $releaseKeyStore
-      - run:
-          name: Create keystore.properies
-          command: printf 'releaseKeyAlias=%s\nreleaseKeyPassword=%s\nreleaseKeyStore=%s\nreleaseStorePassword=%s' $releaseKeyAlias $releaseKeyPassword $releaseKeyStore $releaseStorePassword > keystore.properties
-      - restore_cache:
-          key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
-      - run:
-          name: Chmod permissions #if permission for Gradlew Dependencies fail, use this.
-          command: sudo chmod +x ./gradlew
-      - run:
-          name: Download Dependencies
-          command: ./gradlew androidDependencies
-      - save_cache:
-          paths:
-            - ~/.gradle
-          key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
-      - run:
-          name: Run Tests
-          command: ./gradlew lint test
-      - store_artifacts: # for display in Artifacts: https://circleci.com/docs/2.0/artifacts/
-          path: app/build/reports
-          destination: reports
-      - store_test_results: # for display in Test Summary: https://circleci.com/docs/2.0/collect-test-data/
-          path: app/build/test-results
-      # See https://circleci.com/docs/2.0/deployment-integrations/ for deploy examples
+      - *assemble
+      - *unit_tests
+
+  slack-approval-link:
+    executor: general-executor
+    steps:
+      - *notify_slack_for_approval
+
+  deploy:
+    executor: android-executor
+    steps:
+      - checkout
+      - *assemble
+      - *deploy_apk
+
+orbs:
+  slack: circleci/slack@3.4.1
+
+workflows:
+  version: 2.1
+
+  build-workflow:
+    jobs:
+      - build
+
+      - slack-approval-link:
+          requires:
+            - build
+
+      - pending-deployment:
+          type: approval
+          requires:
+            - build
+
+      - deploy:
+          requires:
+            - pending-deployment
