@@ -40,6 +40,13 @@ aliases:
     run:
       name: Deploy Release Artifact
       command: echo "Deploy release for distribution"
+  - &work_storing_artifacts
+    store_artifacts:
+      path: app/build/reports
+      destination: reports
+  - &work_storing_test_resuts
+    store_test_results:
+      path: app/build/test-results
 
 slack-aliases:
   - &slack_channel_webhook
@@ -63,6 +70,8 @@ jobs:
       - *perm_gradle
       - *assemble
       - *unit_tests
+      - *work_storing_artifacts
+      - *work_storing_test_resuts
 
   slack-approval-link:
     executor: general-executor
