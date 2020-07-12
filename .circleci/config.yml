@@ -16,7 +16,7 @@ executors:
 
 aliases:
   - &create_keystore
-    -run:
+    run:
       name: Create ks.jks
       command: echo $RELEASE_KEYSTORE_BASE64 | base64 -d > $releaseKeyStore
   - &create_keystore_properties
