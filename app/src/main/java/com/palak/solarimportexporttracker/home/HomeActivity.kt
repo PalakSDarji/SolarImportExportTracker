@@ -63,7 +63,7 @@ class HomeActivity : AppCompatActivity() {
         println("ENcr : $en")
         val de = c.decryptData(en)
         println("Dcr : $de")
-
+//testing slack
     }
 
     private fun init() {

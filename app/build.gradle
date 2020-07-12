@@ -7,14 +7,17 @@ apply plugin: "scabbard.gradle"
 apply plugin: 'dagger.hilt.android.plugin'
 apply plugin: 'com.google.firebase.crashlytics'
 
+def keystorePropertiesFile = rootProject.file("keystore.properties")
+def keystoreProperties = new Properties()
+keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 
 android {
     signingConfigs {
         release {
-            storeFile file('D:\\AndroidDev\\Projects\\SolarImportExportTracker\\jks\\ks.jks')
-            storePassword 'sjdbASSDjuh@s234'
-            keyAlias 'Palak'
-            keyPassword 'sjdbASSDjuh@s234'
+            keyAlias keystoreProperties['releaseKeyAlias']
+            keyPassword keystoreProperties['releaseKeyPassword']
+            storeFile file(rootDir.getCanonicalPath() + '/' + keystoreProperties['releaseKeyStore'])
+            storePassword keystoreProperties['releaseStorePassword']
         }
     }
     compileSdkVersion 29
@@ -44,15 +47,15 @@ android {
         multiDexEnabled true
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        signingConfig signingConfigs.release
     }
 
 
     buildTypes {
         release {
-            minifyEnabled true
-            shrinkResources true
+            minifyEnabled false
+            shrinkResources false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
     }
 
