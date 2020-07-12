@@ -24,9 +24,9 @@ aliases:
       name: Create keystore.properies
       command: printf 'releaseKeyAlias=%s\nreleaseKeyPassword=%s\nreleaseKeyStore=%s\nreleaseStorePassword=%s' $releaseKeyAlias $releaseKeyPassword $releaseKeyStore $releaseStorePassword > keystore.properties
   - &perm_gradle
-    - run:
-        name: Chmod permissions #if permission for Gradlew Dependencies fail, use this.
-        command: sudo chmod +x ./gradlew
+    run:
+      name: Chmod permissions #if permission for Gradlew Dependencies fail, use this.
+      command: sudo chmod +x ./gradlew
   - &assemble
     run:
       name: Assemble Project
