@@ -21,7 +21,7 @@ aliases:
       command: echo $RELEASE_KEYSTORE_BASE64 | base64 -d > $releaseKeyStore
   - &create_keystore_properties
     run:
-      name: Create keystore.properies
+      name: Create keystore.properties
       command: printf 'releaseKeyAlias=%s\nreleaseKeyPassword=%s\nreleaseKeyStore=%s\nreleaseStorePassword=%s' $releaseKeyAlias $releaseKeyPassword $releaseKeyStore $releaseStorePassword > keystore.properties
   - &perm_gradle
     run:
