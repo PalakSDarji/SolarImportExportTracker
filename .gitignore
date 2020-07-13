@@ -17,3 +17,4 @@ keystore.properties
 /jks
 /app/release
 /app/full-r8-config.txt
+ks.jks
