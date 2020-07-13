@@ -7,4 +7,4 @@
 
 <br/>
 
-<img height="500" src="https://github.com/PalakSDarji/SolarImportExportTracker/blob/master/1.jpg" />   <img height="500" src="https://github.com/PalakSDarji/SolarImportExportTracker/blob/master/2.jpg" />   <img height="500" src="https://github.com/PalakSDarji/SolarImportExportTracker/blob/master/3.jpg" />
+<img height="500" src="https://github.com/PalakSDarji/SolarImportExportTracker/blob/master/1.jpg" />   <img height="500" src="https://github.com/PalakSDarji/SolarImportExportTracker/blob/master/3.jpg" />   <img height="500" src="https://github.com/PalakSDarji/SolarImportExportTracker/blob/master/2.jpg" />
