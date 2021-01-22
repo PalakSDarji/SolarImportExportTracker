@@ -7,7 +7,7 @@ import kotlinx.coroutines.*
 import javax.inject.Inject
 
 class SolarDataRepository @Inject constructor(private val solarDataDao: SolarDataDao) {
-
+    //TODO commit.
     fun fetchSolarData() : LiveData<List<SolarData>>{
         return solarDataDao.fetchSolarData()
     }
