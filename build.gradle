@@ -45,4 +45,8 @@ ext {
     hilt_jetpack_version = "1.0.0-alpha01"
     dagger_version = "2.28"
     workmanager_version = "2.3.4"
+    gsonVersion = "2.8.5"
+    retrofitVersion = "2.5.0"
+    okhttpIntercepter = "3.12.10"
+    okhttpVersion = "3.12.10"
 }

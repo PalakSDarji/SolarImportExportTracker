@@ -19,7 +19,8 @@ import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
 import javax.inject.Inject
 
-class SolarListAdapter(private val sdfTime: SimpleDateFormat, private val inSdf : SimpleDateFormat) : ListAdapter<Any, RecyclerView.ViewHolder>(SolarDataDiffCallback()) {
+class SolarListAdapter(private val sdfTime: SimpleDateFormat, private val inSdf : SimpleDateFormat) :
+    ListAdapter<Any, RecyclerView.ViewHolder>(SolarDataDiffCallback()) {
 
     companion object {
         private const val TYPE_DATE = 0

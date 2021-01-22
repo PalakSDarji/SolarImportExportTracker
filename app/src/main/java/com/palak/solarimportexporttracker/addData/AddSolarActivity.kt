@@ -58,7 +58,6 @@ class AddSolarActivity : AppCompatActivity() {
         etDate.setText(inSdf.format(cal.time))
     }
 
-    private val solarListViewModel : SolarListViewModel by viewModels()
     private val addSolarViewModel : AddSolarViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
